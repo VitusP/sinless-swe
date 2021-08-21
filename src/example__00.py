@@ -5,27 +5,24 @@ All of the requirements are listed in requirements.txt
 
 import math
 
-"""
-Function to get square root
-
-:param: none
-:return: sqrt of a number
-"""
-
 
 def my_sqrt():
+    """
+    Function to get square root
+
+    :param: none
+    :return: sqrt of a number
+    """
     num = 25
     return sqrt(num)
 
 
-"""
-Function to get a square
-
-:param: none
-:return: sqrt of a number
-"""
-
-
 def my_square():
+    """
+    Function to get a square
+
+    :param: none
+    :return: sqrt of a number
+    """
     num = 10
     return num*num
