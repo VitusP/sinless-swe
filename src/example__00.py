@@ -11,9 +11,12 @@ Function to get square root
 :param: none
 :return: sqrt of a number
 """
+
+
 def my_sqrt():
     num = 25
     return sqrt(num)
+
 
 """
 Function to get a square
@@ -21,6 +24,8 @@ Function to get a square
 :param: none
 :return: sqrt of a number
 """
+
+
 def my_square():
     num = 10
     return num*num
