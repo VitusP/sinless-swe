@@ -8,15 +8,23 @@ import math
 
 def my_sqrt():
     #: Function to get square root
-    #: :param: none
-    #: :return: sqrt of a number
+    #: param: none
+    #: return: sqrt of a number
     num = 25
     return sqrt(num)
 
 
 def my_square():
     #: Function to get a square
-    #: :param: none
-    #: :return: sqrt of a number
+    #: param: none
+    #: return: square of a number
     num = 10
     return num*num
+
+
+def my_cube():
+    #: Function to get a cube
+    #: param: none
+    #: return: cube of a number
+    num = 10
+    return num*num*num
