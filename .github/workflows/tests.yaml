@@ -41,9 +41,9 @@ jobs:
       - name: Create src documentations
         run: |
           pip install pdoc3
-          pdoc3 --output-dir docs --force --html --template-dir docs src; \
-          mv docs/src/* docs; \ 
-          rmdir docs/src; \
+          pdoc3 --output-dir docs --force --html --template-dir docs src;
+          mv docs/src/* docs;
+          rmdir docs/src;
         # Commit documentations
       - name: Commmit docs
         id: commit
