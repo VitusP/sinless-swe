@@ -37,3 +37,36 @@ jobs:
         # Run the test in the tests/ directory
       - name: Run tests
         run: pytest tests/test*
+        # Create pydoc3 documentations (Technique is based on https://github.com/foleycolin00/SinlessColinAndSteven/blob/main/.github/workflows/unit-tests.yml)
+      - name: Create src documentations
+        run: |
+          pip install pdoc3
+          pdoc3 pdoc3 --output-dir docs --force --html --template-dir docs src; \
+          mv docs/src/* docs
+          rmdir docs/src
+        # Commit documentations
+      - name: Commmit docs
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git add --all
+          foo=$(git status --porcelain)
+          if [ -z "$foo" ]
+          then
+            echo "::set-output name=push::failed"
+          else
+             git commit -m "Save src documentations" -a
+            echo "::set-output name=push::success"
+          fi
+        shell: bash
+        # Push docs to repository
+      - name: Push docs
+        if: steps.commit.outputs.push: 'success'
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ github.ref }}
+
+
+
