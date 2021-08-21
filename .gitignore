@@ -128,8 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Ignore all local documentations. Let github automation do it
-docs/*.html
-
 # MAC OS
 .DS_Store
