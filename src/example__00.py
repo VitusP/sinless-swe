@@ -7,22 +7,16 @@ import math
 
 
 def my_sqrt():
-    """
-    Function to get square root
-
-    :param: none
-    :return: sqrt of a number
-    """
+    #: Function to get square root
+    #: :param: none
+    #: :return: sqrt of a number
     num = 25
     return sqrt(num)
 
 
 def my_square():
-    """
-    Function to get a square
-
-    :param: none
-    :return: sqrt of a number
-    """
+    #: Function to get a square
+    #: :param: none
+    #: :return: sqrt of a number
     num = 10
     return num*num
