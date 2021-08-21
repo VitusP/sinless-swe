@@ -14,26 +14,26 @@ jobs:
 
     strategy:
       matrix:
-        # Run in all these versions of Python
+        # Run all versions of these Pythons
         python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
 
     steps:
-        # Checkout the latest code from the repo
+        # Checkout the repo from main
       - name: Checkout repo
         uses: actions/checkout@v2
-        # Setup which version of Python to use
+        # Setup Python version to use
       - name: Set Up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-        # Display the Python version being used
+        # Show the Python version
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
-        # Install pytest (you can use some other testing utility)
+        # Install pytest (will use requirements.txt later)
       - name: Install pytest
         run: |
           python -m pip install --upgrade pip
           pip install pytest
-        # Run the tests. I'm using pytest and the file is in the tests directory.
+        # Run the test in the tests/ directory
       - name: Run tests
         run: pytest tests/test*
