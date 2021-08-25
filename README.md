@@ -7,7 +7,7 @@ alt="License" src="https://img.shields.io/badge/license-MIT-green"></a> </br><im
 src="https://img.shields.io/badge/purpose-AI%2C%20SWE-yellow"> </br></br>
 <img 
 alt="Platform" src="https://img.shields.io/badge/platform-osx%20,%20linux-lightgrey"> </br>
-<a href="https://github.com/timm/keys/actions"><img 
+<a href="https://github.com/VitusP/sinless-swe/actions/workflows/tests.yaml"><img 
 src="https://img.shields.io/badge/build-passing-brightgreen"></a> 
 
 ## About
