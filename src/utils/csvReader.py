@@ -1,13 +1,14 @@
 """
 This is a python script to data mine a csv file and 
-return list of list of data points
+return list of list of data points. This is a part of
+HW1 and HW2
 """
 
 import sys
 import re
 
 def csv_reader():    
-    #: Function to get list of list representation of a csv file
+    #: Function to get list of list representation of a csv file (HW1)
     #: param: file name or path
     #: return: list of list data points
     try:
