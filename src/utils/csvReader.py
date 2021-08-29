@@ -7,12 +7,11 @@ HW1 and HW2
 import sys
 import re
 
-def csv_reader():    
+def csv_reader(fileName):    
     #: Function to get list of list representation of a csv file (HW1)
     #: param: file name or path
     #: return: list of list data points
     try:
-        fileName = sys.argv[1]
         with open(fileName, newline='') as f:
             columnLength = 0
             listofRows = []
@@ -64,4 +63,4 @@ def csv_reader():
         print("Length of data", len(listofRows))
         return listofRows
 
-# csv_reader()
+# csv_reader(sys.argv[1])
