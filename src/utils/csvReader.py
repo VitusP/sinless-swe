@@ -1,5 +1,5 @@
 """
-This is a python scrip to data mine a csv file and 
+This is a python script to data mine a csv file and 
 return list of list of data points
 """
 
