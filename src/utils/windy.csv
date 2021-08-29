@@ -1,0 +1,17 @@
+outlook, Temp, ?Humidity, Windy,Wins+,Play-
+sunny,85,85,0,10,20
+sunny,80,90,1, 12,40
+overcast,83,86,0,40,40
+rainy,70,96,0,40,50
+rainy,68,80,0,
+       50,30
+rainy,65,70,1,4,10
+overcast,64,65,1,30,60
+sunny,72,95,0,7,20 #adsas
+sunny,69,70,0,70,70
+rainy,75,80,0,80,40
+sunny,75,70,1,30,50
+overcast,72,90,1,60,50
+overcast,81,75,0,30,60
+rainy,71, 91, 1 ,50,40
+rainy,invalid, 91, 1 ,50,40
