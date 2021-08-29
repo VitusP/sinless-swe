@@ -40,12 +40,11 @@ HW1 and HW2
 import sys
 import re
 
-def csv_reader():    
+def csv_reader(fileName):    
     #: Function to get list of list representation of a csv file (HW1)
     #: param: file name or path
     #: return: list of list data points
     try:
-        fileName = sys.argv[1]
         with open(fileName, newline=&#39;&#39;) as f:
             columnLength = 0
             listofRows = []
@@ -97,7 +96,7 @@ def csv_reader():
         print(&#34;Length of data&#34;, len(listofRows))
         return listofRows
 
-# csv_reader()</code></pre>
+# csv_reader(sys.argv[1])</code></pre>
 </details>
 </section>
 <section>
@@ -108,7 +107,7 @@ def csv_reader():
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="src.utils.csvReader.csv_reader"><code class="name flex">
-<span>def <span class="ident">csv_reader</span></span>(<span>)</span>
+<span>def <span class="ident">csv_reader</span></span>(<span>fileName)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -116,12 +115,11 @@ def csv_reader():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def csv_reader():    
+<pre><code class="python">def csv_reader(fileName):    
     #: Function to get list of list representation of a csv file (HW1)
     #: param: file name or path
     #: return: list of list data points
     try:
-        fileName = sys.argv[1]
         with open(fileName, newline=&#39;&#39;) as f:
             columnLength = 0
             listofRows = []
