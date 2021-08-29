@@ -1,26 +1,6 @@
 import sys
 import re
 
-# def csv_reader(fileName):    
-#     try:
-#         rowList = []
-#         columnsLength = 0
-#         with open(fileName, newline='\n') as f:
-#             reader = csv.reader(f)
-#             for row in reader:
-#                 # Get the first row 
-#                 if len(rowList) == 0:
-#                     columnsLength = len(row)
-#                 # Add row to list
-#                 if len(row) != columnsLength:
-#                     continue
-#                 rowList.append(row)
-#                 print(row, " Length: ", len(row))
-#     except Exception:
-#         print("Failed to read csv")
-#     else:
-#         print("Column Length: ", columnsLength)
-
 ## Function to read CSV data and output the list of list
 def csv_reader(fileName):    
     try:
