@@ -35,7 +35,7 @@ jobs:
           pip install pdoc3
           pdoc3 --output-dir docs --force --html --template-dir docs src;
           cp -rf docs/src/* docs;
-          rmdir -rf docs/src;
+          rmdir -f docs/src;
         # Commit documentations
       - name: Commmit docs
         id: commit
