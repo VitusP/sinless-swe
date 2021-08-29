@@ -1,9 +1,17 @@
+"""
+This is a python scrip to data mine a csv file and 
+return list of list of data points
+"""
+
 import sys
 import re
 
-## Function to read CSV data and output the list of list
-def csv_reader(fileName):    
+def csv_reader():    
+    #: Function to get list of list representation of a csv file
+    #: param: file name or path
+    #: return: list of list data points
     try:
+        fileName = sys.argv[1]
         with open(fileName, newline='') as f:
             columnLength = 0
             listofRows = []
@@ -50,10 +58,9 @@ def csv_reader(fileName):
     except Exception:
         print("Failed to read csv")
     else:
+        for row in listofRows:
+            print(row)
+        print("Length of data", len(listofRows))
         return listofRows
 
-fileName = sys.argv[1]
-dataList = csv_reader(fileName)
-for row in dataList:
-    print(row)
-print("Length of data", len(dataList))
+# dataList = csv_reader()
