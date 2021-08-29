@@ -63,4 +63,4 @@ def csv_reader():
         print("Length of data", len(listofRows))
         return listofRows
 
-csv_reader()
+# csv_reader()
