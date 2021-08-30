@@ -39,6 +39,7 @@ HW1 and HW2
 
 import sys
 import re
+import time
 
 def csv_reader(fileName):    
     #: Function to get list of list representation of a csv file (HW1)
@@ -47,9 +48,12 @@ def csv_reader(fileName):
     try:
         with open(fileName, newline=&#39;&#39;) as f:
             columnLength = 0
+            rowCounter = 0
             listofRows = []
             dataTypeMap = []
             for row in f:
+                # Count row
+                rowCounter += 1
                 # Remove white spaces
                 row = &#34;&#34;.join(row.split())
                 # Remove the rest of string after &#39;#&#39;
@@ -62,7 +66,7 @@ def csv_reader(fileName):
                     columnLength = len(row)
                     for i in range(0, columnLength):
                         dataTypeMap.append(bool(re.match(r&#39;.*[A-Z]&#39;, row[i])))
-                    print(&#34;Data Type Map: &#34;, dataTypeMap)
+                    # print(&#34;Data Type Map: &#34;, dataTypeMap)
                 else:
                     # Convert data to its data type (number, strings, etc)
                     currentColumn = 0
@@ -76,7 +80,7 @@ def csv_reader(fileName):
                                 newRow.append(float(column))
                             except Exception as e:
                                 # Failed to convert to float
-                                # print(e)
+                                print(&#34;Invalid data type in row: &#34;, rowCounter)
                                 rowIsValid = False
                                 break
                         else:
@@ -88,15 +92,22 @@ def csv_reader(fileName):
                 # Check if each row has correct column length
                 if len(row) == columnLength and rowIsValid:
                     listofRows.append(row)
+                else:
+                    if rowIsValid:
+                        print(&#34;Invalid column length in row: &#34;, rowCounter)
     except Exception:
         print(&#34;Failed to read csv&#34;)
     else:
-        for row in listofRows:
-            print(row)
-        print(&#34;Length of data&#34;, len(listofRows))
+        # for row in listofRows:
+        #     print(row)
+        print(&#34;Size of data&#34;, len(listofRows), &#34; rows&#34;)
         return listofRows
 
-# csv_reader(sys.argv[1])</code></pre>
+# Measure runtime
+startTime = time.time()
+csv_reader(sys.argv[1])
+totalDuration = time.time() - startTime
+print(&#34;Runtime: %s seconds&#34;, totalDuration)</code></pre>
 </details>
 </section>
 <section>
@@ -122,9 +133,12 @@ def csv_reader(fileName):
     try:
         with open(fileName, newline=&#39;&#39;) as f:
             columnLength = 0
+            rowCounter = 0
             listofRows = []
             dataTypeMap = []
             for row in f:
+                # Count row
+                rowCounter += 1
                 # Remove white spaces
                 row = &#34;&#34;.join(row.split())
                 # Remove the rest of string after &#39;#&#39;
@@ -137,7 +151,7 @@ def csv_reader(fileName):
                     columnLength = len(row)
                     for i in range(0, columnLength):
                         dataTypeMap.append(bool(re.match(r&#39;.*[A-Z]&#39;, row[i])))
-                    print(&#34;Data Type Map: &#34;, dataTypeMap)
+                    # print(&#34;Data Type Map: &#34;, dataTypeMap)
                 else:
                     # Convert data to its data type (number, strings, etc)
                     currentColumn = 0
@@ -151,7 +165,7 @@ def csv_reader(fileName):
                                 newRow.append(float(column))
                             except Exception as e:
                                 # Failed to convert to float
-                                # print(e)
+                                print(&#34;Invalid data type in row: &#34;, rowCounter)
                                 rowIsValid = False
                                 break
                         else:
@@ -163,12 +177,15 @@ def csv_reader(fileName):
                 # Check if each row has correct column length
                 if len(row) == columnLength and rowIsValid:
                     listofRows.append(row)
+                else:
+                    if rowIsValid:
+                        print(&#34;Invalid column length in row: &#34;, rowCounter)
     except Exception:
         print(&#34;Failed to read csv&#34;)
     else:
-        for row in listofRows:
-            print(row)
-        print(&#34;Length of data&#34;, len(listofRows))
+        # for row in listofRows:
+        #     print(row)
+        print(&#34;Size of data&#34;, len(listofRows), &#34; rows&#34;)
         return listofRows</code></pre>
 </details>
 </dd>
