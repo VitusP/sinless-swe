@@ -1,3 +1,8 @@
+## HW2: CSV Reader Report
+
+**csvReader.py**
+
+```Python
 """
 This is a python script to data mine a csv file and 
 return list of list of data points. This is a part of
@@ -15,12 +20,9 @@ def csv_reader(fileName):
     try:
         with open(fileName, newline='') as f:
             columnLength = 0
-            rowCounter = 0
             listofRows = []
             dataTypeMap = []
             for row in f:
-                # Count row
-                rowCounter += 1
                 # Remove white spaces
                 row = "".join(row.split())
                 # Remove the rest of string after '#'
@@ -47,7 +49,7 @@ def csv_reader(fileName):
                                 newRow.append(float(column))
                             except Exception as e:
                                 # Failed to convert to float
-                                print("Invalid data type in row: ", rowCounter)
+                                # print(e)
                                 rowIsValid = False
                                 break
                         else:
@@ -59,19 +61,49 @@ def csv_reader(fileName):
                 # Check if each row has correct column length
                 if len(row) == columnLength and rowIsValid:
                     listofRows.append(row)
-                else:
-                    if rowIsValid:
-                        print("Invalid column length in row: ", rowCounter)
     except Exception:
         print("Failed to read csv")
     else:
         # for row in listofRows:
         #     print(row)
-        print("Size of data", len(listofRows), " rows")
+        print("Length of data", len(listofRows))
         return listofRows
+```
 
+## POM3 Runtime Report
+**csvReader.py**
+```Python
 # Measure runtime
 startTime = time.time()
 csv_reader(sys.argv[1])
 totalDuration = time.time() - startTime
 print("Runtime: %s seconds", totalDuration)
+```
+
+The runtime to read and clean pom3a.csv is **0.0619 seconds**
+
+## Invalid Rows Example
+I modified row 20, 21, 50, and 51 to make it invalid
+**pom3a-modified.csv**
+```Shell
+row 20 ,1.01842058254,5.65156386288,0.439436866794,18.7473314896,9.53839835298,3.5626617163,2.67581072348,9.9575819528,784.733261285,0.322026398189,0.180656934307
+row 21
+0.169520130447,jkl,6.67271822305,0.513748143098,6.33427829053,14.6624717106,0.924383271512,4.88822321482,16.5997184106,325.119138361,0.236250118956,0.416666666667
+row 50 
+hello,1.02854740347,6.9466240011,hello,84.8719586081,36.4442397908,3.79771348879,4.92699545345,14.265223051,1252.57339236,0.348923946602,0.260323159785
+row 51
+0.14980297866,1.12719673855,7.95924811772,0.6191934631,33.2633218794,2.66262205226,0.282125938775,0.379793253465,1.21176558547,348.591990624,0.02220886879,hello
+
+```
+**Output**
+Here is the output of our code
+```Shell
+python3 csvReader.py ../../pom3a-modified.csv
+Invalid data type in row:  20
+Invalid data type in row:  21
+Invalid data type in row:  51
+Invalid data type in row:  52
+Invalid column length in row:  9977
+Length of data 9972
+Runtime: %s seconds 0.06659603118896484
+```
