@@ -92,7 +92,7 @@ print("Runtime: ", totalDuration, " seconds")
 The runtime to read and clean pom3a.csv is **0.0619 seconds**
 
 ## Invalid Rows Example
-I modified row 20, 21, 50, and 51 to make it invalid
+I modified row 20, 21, 50, and 51 to make it invalid </br>
 **pom3a-modified.csv**
 ```Shell
 row 20: ,1.01842058254,5.65156386288,0.439436866794,18.7473314896,9.53839835298,3.5626617163,2.67581072348,9.9575819528,784.733261285,0.322026398189,0.180656934307
@@ -101,7 +101,7 @@ row 50: hello,1.02854740347,6.9466240011,hello,84.8719586081,36.4442397908,3.797
 row 51: 0.14980297866,1.12719673855,7.95924811772,0.6191934631,33.2633218794,2.66262205226,0.282125938775,0.379793253465,1.21176558547,348.591990624,0.02220886879,hello
 
 ```
-**Output**
+**Output** </br>
 Here is the output of our code
 ```Shell
 python3 csvReader.py ../../pom3a-modified.csv
