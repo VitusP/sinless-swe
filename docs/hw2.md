@@ -1,4 +1,13 @@
 ## HW2: CSV Reader Report
+### Usage
+```Shell
+$ python3 csvReader.py <.csv File Name>
+```
+To output the cleaned the original ```.csv``` file, uncomment line ```93``` in the ```csvReader.py```
+```Python
+# convert back to csv (uncomment line below)
+toCsv(cleanedCsvList, "cleaned.csv")
+```
 
 **csvReader.py**
 
@@ -77,7 +86,7 @@ def csv_reader(fileName):
 startTime = time.time()
 csv_reader(sys.argv[1])
 totalDuration = time.time() - startTime
-print("Runtime: %s seconds", totalDuration)
+print("Runtime: ", totalDuration, " seconds")
 ```
 
 The runtime to read and clean pom3a.csv is **0.0619 seconds**

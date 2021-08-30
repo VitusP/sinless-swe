@@ -87,7 +87,7 @@ def toCsv(listofList, newFileName):
 startTime = time.time()
 cleanedCsvList = csv_reader(sys.argv[1])
 totalDuration = time.time() - startTime
-print("Runtime: %s seconds", totalDuration)
+print("Runtime: ", totalDuration, " seconds")
 
 # convert back to csv (uncomment line below)
 # toCsv(cleanedCsvList, "cleaned.csv")
