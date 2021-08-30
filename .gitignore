@@ -130,3 +130,6 @@ dmypy.json
 
 # MAC OS
 .DS_Store
+
+# Local test files
+src/*.csv

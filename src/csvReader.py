@@ -7,6 +7,7 @@ HW1 and HW2
 import sys
 import re
 import time
+import csv # only for converting list of list to .csv
 
 def csv_reader(fileName):    
     #: Function to get list of list representation of a csv file (HW1)
@@ -35,43 +36,57 @@ def csv_reader(fileName):
                         dataTypeMap.append(bool(re.match(r'.*[A-Z]', row[i])))
                     # print("Data Type Map: ", dataTypeMap)
                 else:
-                    # Convert data to its data type (number, strings, etc)
-                    currentColumn = 0
-                    newRow = []
-                    for column in row:
-                        # print("Before conversion: ", column)
-                        isNumber = dataTypeMap[currentColumn]
-                        # print("Is number?: ", isNumber)
-                        if isNumber == True:
-                            try:
-                                newRow.append(float(column))
-                            except Exception as e:
-                                # Failed to convert to float
-                                print("Invalid data type in row: ", rowCounter)
-                                rowIsValid = False
-                                break
-                        else:
-                            newRow.append(column)
-                        # print(column)
-                        currentColumn += 1
-                    # print("New Row: ", newRow)
-                    row = newRow
+                    # Check if row length is valid
+                    if len(row) != columnLength:
+                        rowIsValid = False
+                        print("Invalid column length in row: ", rowCounter)
+                    else:                       
+                        # Convert data to its data type (number, strings, etc)
+                        currentColumn = 0
+                        newRow = []
+                        for column in row:
+                            # print("Before conversion: ", column)
+                            isNumber = dataTypeMap[currentColumn]
+                            # print("Is number?: ", isNumber)
+                            if isNumber == True:
+                                try:
+                                    newRow.append(float(column))
+                                except Exception as e:
+                                    # Failed to convert to float
+                                    print("Invalid data type in row: ", rowCounter)
+                                    rowIsValid = False
+                                    break
+                            else:
+                                newRow.append(column)
+                            # print(column)
+                            currentColumn += 1
+                        # print("New Row: ", newRow)
+                        row = newRow
                 # Check if each row has correct column length
                 if len(row) == columnLength and rowIsValid:
                     listofRows.append(row)
-                else:
-                    if rowIsValid:
-                        print("Invalid column length in row: ", rowCounter)
-    except Exception:
-        print("Failed to read csv")
+    except Exception as e:
+        print("Failed to read csv: ", e)
     else:
         # for row in listofRows:
         #     print(row)
         print("Size of data", len(listofRows), " rows")
         return listofRows
 
+def toCsv(listofList, newFileName):
+    #: Function to convert list of list to .csv
+    #: param: list of list data points
+    #: param: new file name
+
+    with open(newFileName, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(listofList)
+
 # Measure runtime
 startTime = time.time()
-csv_reader(sys.argv[1])
+cleanedCsvList = csv_reader(sys.argv[1])
 totalDuration = time.time() - startTime
 print("Runtime: %s seconds", totalDuration)
+
+# convert back to csv
+toCsv(cleanedCsvList, "cleaned.csv")
