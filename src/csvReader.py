@@ -77,6 +77,7 @@ def toCsv(listofList, newFileName):
     #: Function to convert list of list to .csv
     #: param: list of list data points
     #: param: new file name
+    #: return: none
 
     with open(newFileName, 'w', newline='') as f:
         writer = csv.writer(f)
@@ -88,5 +89,5 @@ cleanedCsvList = csv_reader(sys.argv[1])
 totalDuration = time.time() - startTime
 print("Runtime: %s seconds", totalDuration)
 
-# convert back to csv
-toCsv(cleanedCsvList, "cleaned.csv")
+# convert back to csv (uncomment line below)
+# toCsv(cleanedCsvList, "cleaned.csv")
