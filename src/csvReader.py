@@ -68,8 +68,8 @@ def csv_reader(fileName):
     except Exception as e:
         print("Failed to read csv: ", e)
     else:
-        # for row in listofRows:
-        #     print(row)
+        for row in listofRows:
+            print(row)
         print("Size of data", len(listofRows), " rows")
         return listofRows
 
