@@ -11,7 +11,7 @@ alt="Platform" src="https://img.shields.io/badge/platform-osx%20,%20linux-lightg
 src="https://img.shields.io/badge/build-passing-brightgreen"></a> 
 
 ## About
-This is Vitus Putra's *Sinless Software Engineering (CSC 591)* homework and project repository. The main language used is Python. All of the test files are located under ```/test``` folder. All of the source files will be located in ```/src``` folder.
+This is Vitus Putra and Yi Qiu's *Sinless Software Engineering (CSC 591)* homework and project repository. The main language used is Python. All of the test files are located under ```/test``` folder. All of the source files will be located in ```/src``` folder.
 
 
 ### <a href="https://vitusp.github.io/sinless-swe/">Code Documentation Page</a>
