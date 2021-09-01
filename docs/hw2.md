@@ -3,7 +3,7 @@
 ```Shell
 $ python3 csvReader.py <.csv File Name>
 ```
-To output the cleaned the original ```.csv``` file, uncomment line ```93``` in the ```csvReader.py```
+To output the cleaned original ```.csv``` file, uncomment line ```93``` in the ```csvReader.py```
 ```Python
 # convert back to csv (uncomment line below)
 toCsv(cleanedCsvList, "cleaned.csv")
