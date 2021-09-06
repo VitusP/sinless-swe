@@ -1,4 +1,6 @@
 from src.inputOutput import csv_reader
+from src.dataStructure import col
+from enum import Enum
 
 def isKlass(str):
     return '!' in str
@@ -15,13 +17,23 @@ def isWeight(str):
 def isSkip(str):
     return '?' in str
 
+def makeCol(at, name):
+    if isSkip(str):
+        return Skip(at, name)
+    elif isNum(str):
+        return ColType.Num
+    else:
+        return ColType.Sym    
+
 class Sample:
     def __init__(self):
+        self.hasHeader = False
         self.cols = [] # List of tuples for columns
         self.rows = [] # List of rows
         self.y = [] # Goals column
         self.x = [] # Other column
         self.names = [] # row 1 names
+        self.typeMap = [] # header type
         self.klass = []
         self.keep = True
         self.rowsPos = 0
@@ -35,58 +47,23 @@ class Sample:
         return sample
         
     def add(self, lst):
-        if len(self.names) > 0:
-            self.data(lst)
-        else:
+        if not self.hasHeader:
             self.header(lst)
+        else:
+            self.data(lst)
 
     def header(self, lst, what, new, tmp):
         self.names = lst
+
         for at,name in enumerate(lst):
-            what = isSkip(name)
+
+            #what = isSkip(name)
+
+            self.cols.append()
 
     def data(self, lst):
         pass
 
     def clone(self):
         pass
-
-class Skip(Sample):
-    def add(x):
-        return x
-
-
-class Num(Sample):
-    lo = 0 # Highest number
-    hi = 0 # Lowest number
-    mu = 0 
-    m2 = 0
-    n = 0
-    sd = 0
-
-    def add1(self, x):
-        if x < self.lo:
-            self.lo = x
-        if x > self.hi:
-            self.hi = x
-        self.n += 1
-        delta = x - self.mu
-        self.mu = self.mu + delta / self.n
-        self.m2 = self.m2 + delta * (x - self.mu)
-        if self.n > 1:
-            self.sd = (self.m2 / (self.n - 1))**0.5
-
-
-class Sym(Sample):
-    has = {}
-    most = 0
-    mode = 0
-
-    def add1(self, x):
-        if x in self.has.keys():
-            self.has[x] += 1
-        if self.has[x] > self.most:
-            self.most = self.has[x]
-            self.mode = x
-    
 
