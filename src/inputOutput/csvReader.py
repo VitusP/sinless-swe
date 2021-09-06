@@ -84,10 +84,10 @@ def toCsv(listofList, newFileName):
         writer.writerows(listofList)
 
 # Measure runtime
-startTime = time.time()
-cleanedCsvList = csv_reader(sys.argv[1])
-totalDuration = time.time() - startTime
-print("Runtime: ", totalDuration, " seconds")
+# startTime = time.time()
+# cleanedCsvList = csv_reader(sys.argv[1])
+# totalDuration = time.time() - startTime
+# print("Runtime: ", totalDuration, " seconds")
 
 # convert back to csv (uncomment line below)
 # toCsv(cleanedCsvList, "cleaned.csv")
