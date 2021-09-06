@@ -1,5 +1,5 @@
-from dataStructure.col import Num, Sym, Skip
-from inputOutput import csv_reader
+from .col import Num, Sym, Skip
+from src.inputOutput.csvReader import csv_reader
 
 def isKlass(str):
     return '!' in str

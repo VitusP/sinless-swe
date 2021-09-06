@@ -1,1 +1,1 @@
-__all__ = ["inputOutput", "dataStructure"]
+__all__ = ["inputOutput", "dataStructure", "tests"]
