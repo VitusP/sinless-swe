@@ -45,17 +45,25 @@ def csv_reader(fileName):
                         currentColumn = 0
                         newRow = []
                         for column in row:
+                            # if '?' is detected, continue
+                            if column == '?':
+                                newRow.append(column)
+                                currentColumn += 1
+                                continue
                             # print("Before conversion: ", column)
                             isNumber = dataTypeMap[currentColumn]
                             # print("Is number?: ", isNumber)
                             if isNumber == True:
                                 try:
-                                    newRow.append(float(column))
-                                except Exception as e:
-                                    # Failed to convert to float
-                                    print("Invalid data type in row: ", rowCounter)
-                                    rowIsValid = False
-                                    break
+                                    newRow.append(int(column))
+                                except:
+                                    try:
+                                        newRow.append(float(column))
+                                    except Exception as e:
+                                        # Failed to convert to float
+                                        print("Invalid data type in row: ", rowCounter)
+                                        rowIsValid = False
+                                        break
                             else:
                                 newRow.append(column)
                             # print(column)

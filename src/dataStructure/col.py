@@ -47,3 +47,12 @@ class Num(Col):
         self.m2 = self.m2 + delta * (x - self.mu)
         if self.n > 1:
             self.sd = (self.m2 / (self.n - 1))**0.5
+    
+    def normalizedNum(self, inputNum):
+        return (inputNum - self.lo)/(self.hi - self.lo)
+    
+    def getWeight(self):
+        if self.name[-1] == '+':
+            return 1
+        else:
+            return -1

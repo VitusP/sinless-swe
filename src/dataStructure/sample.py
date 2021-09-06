@@ -1,7 +1,5 @@
-from src.dataStructure.col import Num, Sym
-from src.inputOutput import csv_reader
-from src.dataStructure import Skip
-from enum import Enum
+from dataStructure.col import Num, Sym, Skip
+from inputOutput import csv_reader
 
 def isKlass(str):
     return '!' in str
@@ -51,13 +49,13 @@ class Sample:
         else:
             self.data(lst)
 
-    def header(self, lst, what, new, tmp):
+    def header(self, lst):
         self.names = lst
 
         for at,name in enumerate(lst):
             new = makeCol(at, name)
 
-            if isGoal(at, name):
+            if isGoal(name):
                 self.y.append(new)
             else:
                 self.x.append(new)
@@ -66,6 +64,7 @@ class Sample:
                 self.klass = new
 
             self.cols.append(new)
+            self.hasHeader = True
 
     def data(self, list):
         ##Double check line 71-72.
@@ -73,8 +72,19 @@ class Sample:
             col.add(list[at])
         self.rows.append(list)
 
-
-
     def clone(self):
         return Sample().add(self.names)
+    
+    def zitler(self, row1, row2):
+        goals = self.y
+        s1, s2, e, n = 0, 0, 2.71828, len(goals)
+        for goal in goals:
+            w = goal.getWeight()
+            x = goal.normalizedNum(row1[goal.at])
+            y = goal.normalizedNum(row2[goal.at])
+            s1 = s1 - e**(w * (x-y)/n)
+            s2 = s2 - e**(w * (y-x)/n)
+        return s1/n < s2/n
+            
+
 
