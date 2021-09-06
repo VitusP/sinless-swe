@@ -1,5 +1,5 @@
 """
-This is a python script to data mine a csv file and 
+This is a python script to data mine a csv file and
 return list of list of data points. This is a part of
 HW1 and HW2
 """
@@ -45,17 +45,25 @@ def csv_reader(fileName):
                         currentColumn = 0
                         newRow = []
                         for column in row:
+                            # if '?' is detected, continue
+                            if column == '?':
+                                newRow.append(column)
+                                currentColumn += 1
+                                continue
                             # print("Before conversion: ", column)
                             isNumber = dataTypeMap[currentColumn]
                             # print("Is number?: ", isNumber)
                             if isNumber == True:
                                 try:
-                                    newRow.append(float(column))
-                                except Exception as e:
-                                    # Failed to convert to float
-                                    print("Invalid data type in row: ", rowCounter)
-                                    rowIsValid = False
-                                    break
+                                    newRow.append(int(column))
+                                except:
+                                    try:
+                                        newRow.append(float(column))
+                                    except Exception as e:
+                                        # Failed to convert to float
+                                        print("Invalid data type in row: ", rowCounter)
+                                        rowIsValid = False
+                                        break
                             else:
                                 newRow.append(column)
                             # print(column)
@@ -84,10 +92,10 @@ def toCsv(listofList, newFileName):
         writer.writerows(listofList)
 
 # Measure runtime
-startTime = time.time()
-cleanedCsvList = csv_reader(sys.argv[1])
-totalDuration = time.time() - startTime
-print("Runtime: ", totalDuration, " seconds")
+# startTime = time.time()
+# cleanedCsvList = csv_reader(sys.argv[1])
+# totalDuration = time.time() - startTime
+# print("Runtime: ", totalDuration, " seconds")
 
 # convert back to csv (uncomment line below)
 # toCsv(cleanedCsvList, "cleaned.csv")
