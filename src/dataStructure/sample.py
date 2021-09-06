@@ -1,5 +1,6 @@
+from src.dataStructure.col import Num, Sym
 from src.inputOutput import csv_reader
-from src.dataStructure import col
+from src.dataStructure import Skip
 from enum import Enum
 
 def isKlass(str):
@@ -18,12 +19,12 @@ def isSkip(str):
     return '?' in str
 
 def makeCol(at, name):
-    if isSkip(str):
+    if isSkip(name):
         return Skip(at, name)
-    elif isNum(str):
-        return ColType.Num
+    elif isNum(name):
+        return Num(at, name)
     else:
-        return ColType.Sym    
+        return Sym(at, name)  
 
 class Sample:
     def __init__(self):
@@ -35,8 +36,6 @@ class Sample:
         self.names = [] # row 1 names
         self.typeMap = [] # header type
         self.klass = []
-        self.keep = True
-        self.rowsPos = 0
 
     @staticmethod
     def read(filePath):
@@ -56,14 +55,26 @@ class Sample:
         self.names = lst
 
         for at,name in enumerate(lst):
+            new = makeCol(at, name)
 
-            #what = isSkip(name)
+            if isGoal(at, name):
+                self.y.append(new)
+            else:
+                self.x.append(new)
 
-            self.cols.append()
+            if isKlass(name):
+                self.klass = new
 
-    def data(self, lst):
-        pass
+            self.cols.append(new)
+
+    def data(self, list):
+        ##Double check line 71-72.
+        for at,col in enumerate(self.cols):
+            col.add(list[at])
+        self.rows.append(list)
+
+
 
     def clone(self):
-        pass
+        return Sample().add(self.names)
 
