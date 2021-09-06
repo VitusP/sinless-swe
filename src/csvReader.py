@@ -1,5 +1,5 @@
 """
-This is a python script to data mine a csv file and 
+This is a python script to data mine a csv file and
 return list of list of data points. This is a part of
 HW1 and HW2
 """
@@ -9,7 +9,7 @@ import re
 import time
 import csv # only for converting list of list to .csv
 
-def csv_reader(fileName):    
+def csv_reader(fileName):
     #: Function to get list of list representation of a csv file (HW1)
     #: param: file name or path
     #: return: list of list data points
@@ -40,7 +40,7 @@ def csv_reader(fileName):
                     if len(row) != columnLength:
                         rowIsValid = False
                         print("Invalid column length in row: ", rowCounter)
-                    else:                       
+                    else:
                         # Convert data to its data type (number, strings, etc)
                         currentColumn = 0
                         newRow = []
