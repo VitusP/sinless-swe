@@ -1,4 +1,14 @@
+"""
+This is a python script to implement Col, Sym, Num,
+and Skip class for HW3 
+"""
+
 class Col:
+    #: Class for column
+    #: param: the index of column
+    #: param: the name of column
+    #: return: new column
+
     def __init__(self, at, name):
         self.at = at
         self.name = name
