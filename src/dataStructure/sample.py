@@ -2,6 +2,7 @@ from dataStructure.col import Num, Sym, Skip
 from inputOutput import csv_reader
 from functools import cmp_to_key
 
+
 def isKlass(str):
     return '!' in str
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>src.csvReader API documentation</title>
+<title>csvReader API documentation</title>
 <meta name="description" content="This is a python script to data mine a csv file and
 return list of list of data points. This is a part of
 HW1 and HW2" />
@@ -21,7 +21,7 @@ HW1 and HW2" />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.csvReader</code></h1>
+<h1 class="title">Module <code>csvReader</code></h1>
 </header>
 <section id="section-intro">
 <p>This is a python script to data mine a csv file and
@@ -32,7 +32,7 @@ HW1 and HW2</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;
-This is a python script to data mine a csv file and 
+This is a python script to data mine a csv file and
 return list of list of data points. This is a part of
 HW1 and HW2
 &#34;&#34;&#34;
@@ -78,17 +78,25 @@ def csv_reader(fileName):
                         currentColumn = 0
                         newRow = []
                         for column in row:
+                            # if &#39;?&#39; is detected, continue
+                            if column == &#39;?&#39;:
+                                newRow.append(column)
+                                currentColumn += 1
+                                continue
                             # print(&#34;Before conversion: &#34;, column)
                             isNumber = dataTypeMap[currentColumn]
                             # print(&#34;Is number?: &#34;, isNumber)
                             if isNumber == True:
                                 try:
-                                    newRow.append(float(column))
-                                except Exception as e:
-                                    # Failed to convert to float
-                                    print(&#34;Invalid data type in row: &#34;, rowCounter)
-                                    rowIsValid = False
-                                    break
+                                    newRow.append(int(column))
+                                except:
+                                    try:
+                                        newRow.append(float(column))
+                                    except Exception as e:
+                                        # Failed to convert to float
+                                        print(&#34;Invalid data type in row: &#34;, rowCounter)
+                                        rowIsValid = False
+                                        break
                             else:
                                 newRow.append(column)
                             # print(column)
@@ -117,10 +125,10 @@ def toCsv(listofList, newFileName):
         writer.writerows(listofList)
 
 # Measure runtime
-startTime = time.time()
-cleanedCsvList = csv_reader(sys.argv[1])
-totalDuration = time.time() - startTime
-print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
+# startTime = time.time()
+# cleanedCsvList = csv_reader(sys.argv[1])
+# totalDuration = time.time() - startTime
+# print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
 
 # convert back to csv (uncomment line below)
 # toCsv(cleanedCsvList, &#34;cleaned.csv&#34;)</code></pre>
@@ -133,7 +141,7 @@ print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="src.csvReader.csv_reader"><code class="name flex">
+<dt id="csvReader.csv_reader"><code class="name flex">
 <span>def <span class="ident">csv_reader</span></span>(<span>fileName)</span>
 </code></dt>
 <dd>
@@ -178,17 +186,25 @@ print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
                         currentColumn = 0
                         newRow = []
                         for column in row:
+                            # if &#39;?&#39; is detected, continue
+                            if column == &#39;?&#39;:
+                                newRow.append(column)
+                                currentColumn += 1
+                                continue
                             # print(&#34;Before conversion: &#34;, column)
                             isNumber = dataTypeMap[currentColumn]
                             # print(&#34;Is number?: &#34;, isNumber)
                             if isNumber == True:
                                 try:
-                                    newRow.append(float(column))
-                                except Exception as e:
-                                    # Failed to convert to float
-                                    print(&#34;Invalid data type in row: &#34;, rowCounter)
-                                    rowIsValid = False
-                                    break
+                                    newRow.append(int(column))
+                                except:
+                                    try:
+                                        newRow.append(float(column))
+                                    except Exception as e:
+                                        # Failed to convert to float
+                                        print(&#34;Invalid data type in row: &#34;, rowCounter)
+                                        rowIsValid = False
+                                        break
                             else:
                                 newRow.append(column)
                             # print(column)
@@ -207,7 +223,7 @@ print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
         return listofRows</code></pre>
 </details>
 </dd>
-<dt id="src.csvReader.toCsv"><code class="name flex">
+<dt id="csvReader.toCsv"><code class="name flex">
 <span>def <span class="ident">toCsv</span></span>(<span>listofList, newFileName)</span>
 </code></dt>
 <dd>
@@ -238,15 +254,10 @@ print(&#34;Runtime: &#34;, totalDuration, &#34; seconds&#34;)
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3>Super-module</h3>
-<ul>
-<li><code><a title="src" href="index.html">src</a></code></li>
-</ul>
-</li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="src.csvReader.csv_reader" href="#src.csvReader.csv_reader">csv_reader</a></code></li>
-<li><code><a title="src.csvReader.toCsv" href="#src.csvReader.toCsv">toCsv</a></code></li>
+<li><code><a title="csvReader.csv_reader" href="#csvReader.csv_reader">csv_reader</a></code></li>
+<li><code><a title="csvReader.toCsv" href="#csvReader.toCsv">toCsv</a></code></li>
 </ul>
 </li>
 </ul>
