@@ -1,5 +1,10 @@
-from .col import Num, Sym, Skip
-from src.inputOutput.csvReader import csv_reader
+"""
+This is a python script to create Sample class
+from a csv file and sort it based on different criteria
+"""
+
+from .col import Num, Sym, Skip # import from col
+from src.inputOutput.csvReader import csv_reader # import csv reader
 
 def isKlass(str):
     return '!' in str

@@ -1,3 +1,7 @@
+"""
+dataStructure init
+"""
+
 from .sample import Sample
 from .col import Skip, Num, Sym, Col
 
