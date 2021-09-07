@@ -1,10 +1,7 @@
-"""
-This is a python script to create Sample class
-from a csv file and sort it based on different criteria
-"""
+from .col import Num, Sym, Skip
+from src.inputOutput import csv_reader
+from functools import cmp_to_key
 
-from .col import Num, Sym, Skip # import from col
-from src.inputOutput.csvReader import csv_reader # import csv reader
 
 def isKlass(str):
     return '!' in str
@@ -72,7 +69,6 @@ class Sample:
             self.hasHeader = True
 
     def data(self, list):
-        ##Double check line 71-72.
         for at,col in enumerate(self.cols):
             col.add(list[at])
         self.rows.append(list)
@@ -89,7 +85,9 @@ class Sample:
             y = goal.normalizedNum(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
-        return s1/n < s2/n
-            
+        return -1 if (s1/n < s2/n) else 1
+    
+    def sort(self):
+        return sorted(self.rows, key = cmp_to_key(self.zitler))
 
 
