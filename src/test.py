@@ -2,9 +2,16 @@ from dataStructure import Sample
 from inputOutput import csv_reader
 import sys
 
-returnedSample = Sample.read(sys.argv[1])
-# for row in returnedSample.rows:
-#     print(row)
+returnedSample = Sample.read(sys.argv[1]).sort()
 
-for col in returnedSample.cols:
-    print(col.name)
+top = returnedSample[:5]
+
+bot = returnedSample[-5:]
+
+for t in top:   
+    print(t)
+
+print('-----------------------------------')
+
+for b in bot:   
+    print(b)

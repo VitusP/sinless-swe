@@ -77,7 +77,8 @@ def csv_reader(fileName):
         print("Failed to read csv: ", e)
     else:
         for row in listofRows:
-            print(row)
+            #print(row)
+            pass
         print("Size of data", len(listofRows), " rows")
         return listofRows
 

@@ -37,6 +37,8 @@ class Num(Col):
         self.sd = 0
 
     def add(self, x):
+        if x == '?':
+            return
         if x < self.lo:
             self.lo = x
         if x > self.hi:
