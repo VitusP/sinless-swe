@@ -3,8 +3,9 @@ import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 from src.dataStructure import Sample
 
-
-returnedSample = Sample.read(sys.argv[1]).sort()
+dataPath = os.path.dirname(os.path.abspath(__file__))
+dataPath = dataPath[:dataPath.rindex("/")]
+returnedSample = Sample.read("data/auto93.csv").sort()
 
 top = returnedSample[:5]
 

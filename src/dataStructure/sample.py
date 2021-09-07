@@ -1,5 +1,5 @@
-from dataStructure.col import Num, Sym, Skip
-from inputOutput import csv_reader
+from .col import Num, Sym, Skip
+from src.inputOutput import csv_reader
 from functools import cmp_to_key
 
 
