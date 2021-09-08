@@ -57,7 +57,7 @@ class Num(Col):
         delta = x - self.mu
         self.mu = self.mu + delta / self.n
         self.m2 = self.m2 + delta * (x - self.mu)
-        if self.n > 1:
+        if self.n > 1 and self.m2 > 0:
             self.sd = (self.m2 / (self.n - 1))**0.5
     
     def normalizedNum(self, inputNum):
