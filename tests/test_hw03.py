@@ -3,18 +3,30 @@ import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 from src.dataStructure import Sample
 
+# Set the right file system
 dataPath = os.path.dirname(os.path.abspath(__file__))
 dataPath = dataPath[:dataPath.rindex("/")]
-returnedSample = Sample.read("data/auto93.csv").sort()
 
-top = returnedSample[:5]
+# Call Sample
+returnedSample = Sample.read("data/auto93.csv")
+sortedSample = returnedSample.sort()
 
-bot = returnedSample[-5:]
+top = sortedSample[:5]
 
-for t in top:   
-    print(t)
+bot = sortedSample[-5:]
 
-print('-----------------------------------')
+for cols in returnedSample.cols:
+    print(cols.name, "  ", end = '')
+print()    
+
+for t in top:
+    [(print("    ",x, "    ",end = '')) for x in t]
+    print()
+
+    #print(t)
+
+print('-----------------------------------------------------------------')
 
 for b in bot:   
-    print(b)
+    [(print("    ",x, "    ",end = '')) for x in b]
+    print()
