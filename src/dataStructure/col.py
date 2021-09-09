@@ -29,7 +29,7 @@ class Sym(Col):
 
     def add(self, x):
         if x in self.has.keys():
-            self.has[x] += 1
+            self.has[x] = 1 + self.has.get(x,0)
         else:
             self.has[x] = 1
 
@@ -39,8 +39,8 @@ class Sym(Col):
 class Num(Col):
     def __init__(self, at, name):
         super().__init__(at, name)
-        self.lo = 0 # Highest number
-        self.hi = 0 # Lowest number
+        self.lo = float('inf') # Highest number
+        self.hi = float('-inf') # Lowest number
         self.mu = 0 
         self.m2 = 0
         self.n = 0

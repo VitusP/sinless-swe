@@ -18,3 +18,4 @@ This is Vitus Putra and Yi Qiu's *Sinless Software Engineering (CSC 591)* homewo
 
 ## Homework Pages
 ### <a href="https://vitusp.github.io/sinless-swe/hw2">HW2 Page</a>
+### <a href="https://vitusp.github.io/sinless-swe/hw3">HW3 Page</a>
