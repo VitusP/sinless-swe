@@ -1,5 +1,5 @@
 """
-dataStructure init
+hw3 init
 """
 
 from .sample import Sample
