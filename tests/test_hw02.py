@@ -1,4 +1,4 @@
-from src.inputOutput import csv_reader
+from src.hw2 import csv_reader
 import os
 import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
