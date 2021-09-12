@@ -35,6 +35,9 @@ class Sym(Col):
 
         if self.has[x] > self.most:
             self.most, self.mode = self.has[x], x
+    
+    def dist(x, y):
+        return 0 if x == y else 1
 
 class Num(Col):
     def __init__(self, at, name):
@@ -68,3 +71,14 @@ class Num(Col):
             return 1
         else:
             return -1
+    
+    def dist(self, x, y):
+        if x == '?':
+            y = self.normalizedNum(y)
+            x = 0 if y > 0.5 else 1
+        elif y == '?':
+            x = self.normalizedNum(x)
+            y = 0 if x > 0.5 else 1
+        else:
+            x, y = self.normalizedNum(x), self.normalizedNum(y)
+        return abs(x-y)

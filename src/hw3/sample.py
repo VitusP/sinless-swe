@@ -1,5 +1,5 @@
 """
-This is the main Sample class used for HW3 
+This is the main Sample class used for HW3 and HW4
 Implementation.
 """
 
@@ -94,5 +94,16 @@ class Sample:
     
     def sort(self):
         return sorted(self.rows, key = cmp_to_key(self.zitler))
+    
+    def dist(self, row1, row2, targetColumn):
+        d, n = 0, 1E-32
+        for col in targetColumn:
+            n = n + 1
+            a, b = row1[col.at], row2[col.at]
+            if a=='?' and b=='?':
+                d = d + 1
+            else:
+                d = d + col.dist(a, b)**len(targetColumn)
+        return True
 
 
