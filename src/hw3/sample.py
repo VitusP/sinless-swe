@@ -95,15 +95,26 @@ class Sample:
     def sort(self):
         return sorted(self.rows, key = cmp_to_key(self.zitler))
     
-    def dist(self, row1, row2, targetColumn):
+    def dist(self, row1, row2, the):
         d, n = 0, 1E-32
-        for col in targetColumn:
+        for col in the.cols:
             n = n + 1
             a, b = row1[col.at], row2[col.at]
             if a=='?' and b=='?':
                 d = d + 1
             else:
-                d = d + col.dist(a, b)**len(targetColumn)
-        return True
+                d = d + col.dist(a, b)**len(the.p)
+        return (d/n)**(1/the.p)
+    
+    def neighborSort(y,z):
+        return y[1] < y[z]
+    
+    def neighbors(self, r1, the, rows):
+        a = []
+        rows = rows or self.rows
+        for i,r2 in enumerate(rows):
+            a.append((self.dist(r1,r2,the),r2))
+        sorted(a, key=self.neighborSort)
+
 
 
