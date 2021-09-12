@@ -106,15 +106,12 @@ class Sample:
                 d = d + col.dist(a, b)**len(the.p)
         return (d/n)**(1/the.p)
     
-    def neighborSort(y,z):
-        return y[1] < y[z]
-    
-    def neighbors(self, r1, the, rows):
+    def neighbors(self, r1, rows):
         a = []
         rows = rows or self.rows
-        for i,r2 in enumerate(rows):
-            a.append((self.dist(r1,r2,the),r2))
-        sorted(a, key=self.neighborSort)
+        for r2 in rows:
+            a.append((self.dist(r1,r2),r2))
+        return sorted(a, key=lambda tuple: tuple[0])
 
 
 
