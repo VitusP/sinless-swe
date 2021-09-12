@@ -2,11 +2,19 @@
 This is the main Sample class used for HW3 and HW4
 Implementation.
 """
+import random
 
 from .col import Num, Sym, Skip
 from src.hw2 import csv_reader
 from functools import cmp_to_key
 
+CONFIG = {
+    'p':2,
+    'enough':0.5,
+    'samples':256,
+    'far': 0.9,
+    'loud': False
+}
 
 def isKlass(str):
     return '!' in str
@@ -95,16 +103,16 @@ class Sample:
     def sort(self):
         return sorted(self.rows, key = cmp_to_key(self.zitler))
     
-    def dist(self, row1, row2, the):
+    def dist(self, row1, row2):
         d, n = 0, 1E-32
-        for col in the.cols:
+        for col in self.cols:
             n = n + 1
             a, b = row1[col.at], row2[col.at]
             if a=='?' and b=='?':
                 d = d + 1
             else:
-                d = d + col.dist(a, b)**len(the.p)
-        return (d/n)**(1/the.p)
+                d = d + col.dist(a, b)**len(CONFIG['p'])
+        return (d/n)**(1/CONFIG['p'])
     
     def neighbors(self, r1, rows):
         a = []
@@ -112,6 +120,47 @@ class Sample:
         for r2 in rows:
             a.append((self.dist(r1,r2),r2))
         return sorted(a, key=lambda tuple: tuple[0])
+
+    def faraway(self, r):
+        shuffled = random.shuffle(self.rows)
+        all = []
+        if len(shuffled) < CONFIG['samples']:
+            all = self.neighbors(r, shuffled)
+        else:
+            all = self.neighbors(r, shuffled[:CONFIG['samples']])
+        return all[CONFIG['far']*len(all)][1]
+        
+    def div1(self, rows):
+        one = self.faraway(rows[random.randrange(0, len(rows) - 1)])
+        two = self.faraway(one)
+        c = self.dist(one, two)
+
+        for at, row in rows:
+            a = self.dist(row, one)
+            b = self.dist(row, two)
+            row['projection'] = (a**2 + c**2 - b**2) / (2*c)
+
+        rows = sorted(rows, key=lambda proj:row['projection'])
+        mid = len(rows)/2
+        return rows[1:mid], rows[mid + 1:]
+
+    def recursive_divs(self, leafs, enough, rows, lvl):
+        if CONFIG['loud']:
+            pass
+
+        if len(rows) < 2 * enough:
+            leafs.append(rows)
+        else:
+            l,r = self.div1(rows)
+            self.divs(leafs, l, lvl + 1)
+            self.divs(leafs, r, lvl + 1)
+
+    def divs(self):
+        leafs = []
+        enough = pow(len(self. rows), CONFIG['enough'])
+        self.recursive_divs(leafs, enough, self.rows, 0)
+        return leafs
+
 
 
 
