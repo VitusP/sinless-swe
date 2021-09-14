@@ -1,8 +1,7 @@
-from src.hw3 import Sample
 import os
 import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
-
+from src.hw3 import Sample
 
 def testHw3():
     # Set the right file system

@@ -36,7 +36,7 @@ class Sym(Col):
         if self.has[x] > self.most:
             self.most, self.mode = self.has[x], x
     
-    def dist(x, y):
+    def dist(self, x, y):
         return 0 if x == y else 1
 
 class Num(Col):

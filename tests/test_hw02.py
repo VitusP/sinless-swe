@@ -1,8 +1,7 @@
-from src.hw2 import csv_reader
 import os
 import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
-
+from src.hw2 import csv_reader
 
 def testCsvReader():
     expectedResult = [['outlook', 'Temp', '?Humidity', 'windy', 'Wins+', 'Play-'],

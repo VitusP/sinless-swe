@@ -3,6 +3,7 @@ This is the main Sample class used for HW3 and HW4
 Implementation.
 """
 import random
+import math
 
 from .col import Num, Sym, Skip
 from src.hw2 import csv_reader
@@ -11,7 +12,7 @@ from functools import cmp_to_key
 CONFIG = {
     'p':2,
     'enough':0.5,
-    'samples':256,
+    'samples':128,
     'far': 0.9,
     'loud': False
 }
@@ -111,10 +112,10 @@ class Sample:
             if a=='?' and b=='?':
                 d = d + 1
             else:
-                d = d + col.dist(a, b)**len(CONFIG['p'])
+                d = d + col.dist(a, b)**CONFIG['p']
         return (d/n)**(1/CONFIG['p'])
     
-    def neighbors(self, r1, rows):
+    def neighbors(self, r1, rows = {}):
         a = []
         rows = rows or self.rows
         for r2 in rows:
@@ -122,27 +123,28 @@ class Sample:
         return sorted(a, key=lambda tuple: tuple[0])
 
     def faraway(self, r):
-        shuffled = random.shuffle(self.rows)
-        all = []
-        if len(shuffled) < CONFIG['samples']:
-            all = self.neighbors(r, shuffled)
-        else:
-            all = self.neighbors(r, shuffled[:CONFIG['samples']])
-        return all[CONFIG['far']*len(all)][1]
+        shuffled = random.sample(self.rows, CONFIG['samples'])
+        all = self.neighbors(r, shuffled)
+        # [(print(x)) for x in all]
+        return all[math.floor(CONFIG['far']*len(all))][1]
         
     def div1(self, rows):
         one = self.faraway(rows[random.randrange(0, len(rows) - 1)])
         two = self.faraway(one)
         c = self.dist(one, two)
 
-        for at, row in rows:
+        rowPlusProjections = []
+        for row in rows:
             a = self.dist(row, one)
             b = self.dist(row, two)
-            row['projection'] = (a**2 + c**2 - b**2) / (2*c)
+            projection = (a**2 + c**2 - b**2) / (2*c)
+            rowPlusProjections.append((projection, row))
 
-        rows = sorted(rows, key=lambda proj:row['projection'])
+        rowPlusProjections = sorted(rowPlusProjections, key=lambda proj:proj[0])
         mid = len(rows)/2
-        return rows[1:mid], rows[mid + 1:]
+        left = [proj[1] for proj in rowPlusProjections[1:math.floor(mid)]]
+        right = [proj[1] for proj in rowPlusProjections[math.floor(mid) + 1:]]
+        return left, right
 
     def recursive_divs(self, leafs, enough, rows, lvl):
         if CONFIG['loud']:
@@ -152,12 +154,12 @@ class Sample:
             leafs.append(rows)
         else:
             l,r = self.div1(rows)
-            self.divs(leafs, l, lvl + 1)
-            self.divs(leafs, r, lvl + 1)
+            self.recursive_divs(leafs, enough, l, lvl + 1)
+            self.recursive_divs(leafs, enough, r, lvl + 1)
 
     def divs(self):
         leafs = []
-        enough = pow(len(self. rows), CONFIG['enough'])
+        enough = pow(len(self.rows), CONFIG['enough'])
         self.recursive_divs(leafs, enough, self.rows, 0)
         return leafs
 
