@@ -64,6 +64,7 @@ class Num(Col):
         self.m2 = 0
         self.n = 0
         self.sd = 0
+        self.w = -1 if self.name[-1] == '1' else 1
 
     def add(self, x):
         if x == '?':
@@ -80,7 +81,7 @@ class Num(Col):
             self.sd = (self.m2 / (self.n - 1))**0.5
     
     def mid(self):
-        return self.mu
+        return round(self.mu, 1)
     
     def norm(self, inputNum):
         return 0 if abs(self.lo - self.hi) < 1E-31 else (inputNum - self.lo)/(self.hi - self.lo)

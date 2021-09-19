@@ -65,8 +65,8 @@ class Sample:
     """
     Sort tables by their mid values.
     """
-    def __lt__(i,j):
-        return  Row(i.mid(),i) < Row(j.mid(), j)
+    def __lt__(self,j):
+        return  Row(self.mid(),self) < Row(j.mid(), j)
 
     """
     Read the csv file and create Sample class
@@ -132,8 +132,15 @@ class Sample:
     get the mid of the goal
     :return goal mid: mid goal
     """
-    def mid(self):
+    def ys(self):
         return [goal.mid() for goal in self.y]
+    
+    """
+    get the mid of the all columns
+    :return goal mid: mid goal
+    """
+    def mid(self):
+        return [goal.mid() for goal in self.cols]
     
     """
     Sorting rows based on Zitler
@@ -197,7 +204,7 @@ class Sample:
     """
     def faraway(self, r, rows):
         # shuffled = random.sample(self.rows, CONFIG['samples'])
-        shuffled = random.sample(rows, math.floor(len(rows)/10))
+        shuffled = random.sample(rows, math.floor(len(rows)/5))
         all = self.neighbors(r, shuffled)
         return all[math.floor(CONFIG['far']*len(all))][1]
     
@@ -207,8 +214,8 @@ class Sample:
     :return left, right: rows left and right
     """
     def div1(self, rows):
-        # one = self.faraway(rows[random.randrange(0, len(rows) - 1)], rows)
-        one = rows[random.randrange(0, len(rows) - 1)]
+        one = self.faraway(rows[random.randrange(0, len(rows) - 1)], rows)
+        # one = rows[random.randrange(0, len(rows) - 1)]
         two = self.faraway(one, rows)
         c = self.dist(one, two)
 
@@ -275,20 +282,20 @@ class Sample:
     """
     def printGoals(self, leaf, lvl):
         print("|.. "*lvl,"n=", len(leaf.rows), end="")
-        print(" goal=", leaf.mid())
+        print(" goal=", leaf.ys())
 
 """
 Row class implementation
 """
 class Row():
-    def __init__(i,lst,sample): 
-        i.sample,i.cells, i.ranges = sample, lst,[None]*len(lst)
+    def __init__(self,lst,sample): 
+        self.sample,self.cells, self.ranges = sample, lst,[None]*len(lst)
         
-    def __lt__(i,j):
+    def __lt__(self,j):
         "Does row1 win over row2?"
-        loss1, loss2, n = 0, 0, len(i.sample.y)
-        for col in i.sample.y:
-            a   = col.norm(i.cells[col.at])
+        loss1, loss2, n = 0, 0, len(self.sample.y)
+        for col in self.sample.y:
+            a   = col.norm(self.cells[col.at])
             b   = col.norm(j.cells[col.at])  # bug fix: MUST be j.cells
         loss1 -= math.e**(col.w * (a - b) / n)
         loss2 -= math.e**(col.w * (b - a) / n)

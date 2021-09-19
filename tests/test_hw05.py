@@ -14,6 +14,8 @@ samp = Sample.read("data/auto93.csv")
 
 leafs = samp.divs()
 sampleLeafs = []
+for sample in sorted(leafs):
+    print(sample.ys())
 # for leaf in leafs:
 #     print(leaf)
 #     print("-------------")
