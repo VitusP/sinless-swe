@@ -116,8 +116,8 @@ class Sample:
         s1, s2, e, n = 0, 0, 2.71828, len(goals)
         for goal in goals:
             w = goal.getWeight()
-            x = goal.normalizedNum(row1[goal.at])
-            y = goal.normalizedNum(row2[goal.at])
+            x = goal.norm(row1[goal.at])
+            y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
         return s1/n &lt; s2/n
@@ -284,8 +284,8 @@ class Sample:
         s1, s2, e, n = 0, 0, 2.71828, len(goals)
         for goal in goals:
             w = goal.getWeight()
-            x = goal.normalizedNum(row1[goal.at])
-            y = goal.normalizedNum(row2[goal.at])
+            x = goal.norm(row1[goal.at])
+            y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
         return s1/n &lt; s2/n</code></pre>
@@ -399,8 +399,8 @@ def read(filePath):
     s1, s2, e, n = 0, 0, 2.71828, len(goals)
     for goal in goals:
         w = goal.getWeight()
-        x = goal.normalizedNum(row1[goal.at])
-        y = goal.normalizedNum(row2[goal.at])
+        x = goal.norm(row1[goal.at])
+        y = goal.norm(row2[goal.at])
         s1 = s1 - e**(w * (x-y)/n)
         s2 = s2 - e**(w * (y-x)/n)
     return s1/n &lt; s2/n</code></pre>

@@ -2,7 +2,11 @@
 This is a python script to implement Col, Sym, Num,
 and Skip class for HW3 
 """
+import math
 
+"""
+Column class implementation
+"""
 class Col:
     #: Class for column
     #: param: the index of column
@@ -16,9 +20,15 @@ class Col:
     def add(self, x):
         pass
 
+"""
+Skip class implementation
+"""
 class Skip(Col):
     pass
 
+"""
+Symbol class implementation
+"""
 class Sym(Col):
 
     def __init__(self, at, name):
@@ -26,6 +36,9 @@ class Sym(Col):
         self.has = {}
         self.most = 0
         self.mode = 0
+    
+    def mid(self):
+        return self.mode
 
     def add(self, x):
         if x in self.has.keys():
@@ -39,6 +52,9 @@ class Sym(Col):
     def dist(self, x, y):
         return 0 if x == y else 1
 
+"""
+Num class implementation
+"""
 class Num(Col):
     def __init__(self, at, name):
         super().__init__(at, name)
@@ -63,8 +79,11 @@ class Num(Col):
         if self.n > 1 and self.m2 > 0:
             self.sd = (self.m2 / (self.n - 1))**0.5
     
-    def normalizedNum(self, inputNum):
-        return (inputNum - self.lo)/(self.hi - self.lo)
+    def mid(self):
+        return self.mu
+    
+    def norm(self, inputNum):
+        return 0 if abs(self.lo - self.hi) < 1E-31 else (inputNum - self.lo)/(self.hi - self.lo)
     
     def getWeight(self):
         if self.name[-1] == '+':
@@ -74,11 +93,12 @@ class Num(Col):
     
     def dist(self, x, y):
         if x == '?':
-            y = self.normalizedNum(y)
+            y = self.norm(y)
             x = 0 if y > 0.5 else 1
         elif y == '?':
-            x = self.normalizedNum(x)
+            x = self.norm(x)
             y = 0 if x > 0.5 else 1
         else:
-            x, y = self.normalizedNum(x), self.normalizedNum(y)
+            x, y = self.norm(x), self.norm(y)
         return abs(x-y)
+
