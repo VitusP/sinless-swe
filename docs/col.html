@@ -89,7 +89,7 @@ class Num(Col):
         if self.n &gt; 1:
             self.sd = (self.m2 / (self.n - 1))**0.5
     
-    def normalizedNum(self, inputNum):
+    def norm(self, inputNum):
         return (inputNum - self.lo)/(self.hi - self.lo)
     
     def getWeight(self):
@@ -186,7 +186,7 @@ class Num(Col):
         if self.n &gt; 1:
             self.sd = (self.m2 / (self.n - 1))**0.5
     
-    def normalizedNum(self, inputNum):
+    def norm(self, inputNum):
         return (inputNum - self.lo)/(self.hi - self.lo)
     
     def getWeight(self):
@@ -239,8 +239,8 @@ class Num(Col):
         return -1</code></pre>
 </details>
 </dd>
-<dt id="col.Num.normalizedNum"><code class="name flex">
-<span>def <span class="ident">normalizedNum</span></span>(<span>self, inputNum)</span>
+<dt id="col.Num.norm"><code class="name flex">
+<span>def <span class="ident">norm</span></span>(<span>self, inputNum)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -248,7 +248,7 @@ class Num(Col):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def normalizedNum(self, inputNum):
+<pre><code class="python">def norm(self, inputNum):
     return (inputNum - self.lo)/(self.hi - self.lo)</code></pre>
 </details>
 </dd>
@@ -348,7 +348,7 @@ class Num(Col):
 <ul class="">
 <li><code><a title="col.Num.add" href="#col.Num.add">add</a></code></li>
 <li><code><a title="col.Num.getWeight" href="#col.Num.getWeight">getWeight</a></code></li>
-<li><code><a title="col.Num.normalizedNum" href="#col.Num.normalizedNum">normalizedNum</a></code></li>
+<li><code><a title="col.Num.norm" href="#col.Num.norm">norm</a></code></li>
 </ul>
 </li>
 <li>

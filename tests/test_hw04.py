@@ -24,7 +24,7 @@ def testSampFaraway():
     # Call Sample
     samp2 = Sample.read("data/auto93.csv")
     neighbors = samp2.neighbors(samp2.rows[1])
-    faraway = samp2.faraway(samp2.rows[0])
+    faraway = samp2.faraway(samp2.rows[0],samp2.rows)
     assert len(faraway) == 8
 
 def testNeighbors():
@@ -50,7 +50,7 @@ def testDivs():
 
     divResult = samp4.divs()
 
-    assert len(divResult) == 16
+    assert len(divResult) == 32
 
 ## Runtime report
 dataPath = os.path.dirname(os.path.abspath(__file__))
@@ -65,7 +65,7 @@ print("Runtime Sample Dist(): ", totalDuration, " seconds")
 
 # Measure runtime
 startTime = time.time()
-runtimeSample.faraway(runtimeSample.rows[0])
+runtimeSample.faraway(runtimeSample.rows[0], runtimeSample.rows)
 totalDuration = time.time() - startTime
 print("Runtime Sample faraway(): ", totalDuration, " seconds")
 

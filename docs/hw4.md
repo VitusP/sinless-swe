@@ -92,13 +92,13 @@ def dist(self, x, y):
 # Num Distance
 def dist(self, x, y):
         if x == '?':
-            y = self.normalizedNum(y)
+            y = self.norm(y)
             x = 0 if y > 0.5 else 1
         elif y == '?':
-            x = self.normalizedNum(x)
+            x = self.norm(x)
             y = 0 if x > 0.5 else 1
         else:
-            x, y = self.normalizedNum(x), self.normalizedNum(y)
+            x, y = self.norm(x), self.norm(y)
         return abs(x-y)
 ```
 ### **Runtime Analysis**

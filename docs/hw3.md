@@ -94,8 +94,8 @@ class Sample:
         s1, s2, e, n = 0, 0, 2.71828, len(goals)
         for goal in goals:
             w = goal.getWeight()
-            x = goal.normalizedNum(row1[goal.at])
-            y = goal.normalizedNum(row2[goal.at])
+            x = goal.norm(row1[goal.at])
+            y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
         return -1 if (s1/n < s2/n) else 1
@@ -169,7 +169,7 @@ class Num(Col):
         if self.n > 1 and self.m2 > 0:
             self.sd = (self.m2 / (self.n - 1))**0.5
     
-    def normalizedNum(self, inputNum):
+    def norm(self, inputNum):
         return (inputNum - self.lo)/(self.hi - self.lo)
     
     def getWeight(self):
