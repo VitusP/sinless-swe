@@ -156,7 +156,7 @@ class Sample:
             y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
-        return 0 if (s1/n < s2/n) else 1
+        return -1 if (s1/n < s2/n) else 1
     
     """
     Sorting rows using Zitler
