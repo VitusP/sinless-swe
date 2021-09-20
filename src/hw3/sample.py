@@ -156,7 +156,7 @@ class Sample:
             y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
-        return -1 if (s1/n < s2/n) else 1
+        return 0 if (s1/n < s2/n) else 1
     
     """
     Sorting rows using Zitler
@@ -204,7 +204,7 @@ class Sample:
     """
     def faraway(self, r, rows):
         # shuffled = random.sample(self.rows, CONFIG['samples'])
-        shuffled = random.sample(rows, math.floor(len(rows)/5))
+        shuffled = random.sample(rows, math.floor(len(rows)/10))
         all = self.neighbors(r, shuffled)
         return all[math.floor(CONFIG['far']*len(all))][1]
     
@@ -297,6 +297,6 @@ class Row():
         for col in self.sample.y:
             a   = col.norm(self.cells[col.at])
             b   = col.norm(j.cells[col.at])  # bug fix: MUST be j.cells
-        loss1 -= math.e**(col.w * (a - b) / n)
-        loss2 -= math.e**(col.w * (b - a) / n)
+            loss1 -= math.e**(col.getWeight() * (a - b) / n)
+            loss2 -= math.e**(col.getWeight() * (b - a) / n)
         return loss1 / n < loss2 / n
