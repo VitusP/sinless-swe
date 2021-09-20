@@ -204,9 +204,10 @@ class Sample:
     """
     def faraway(self, r, rows):
         # shuffled = random.sample(self.rows, CONFIG['samples'])
-        shuffled = random.sample(rows, math.floor(len(rows)/10))
+        n = min(128,len(rows))
+        shuffled = random.sample(rows, n)
         all = self.neighbors(r, shuffled)
-        return all[math.floor(CONFIG['far']*len(all))][1]
+        return all[math.floor(CONFIG['far']*n)][1]
     
     """
     Divide a sample into two based on distances
