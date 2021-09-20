@@ -16,6 +16,7 @@ CONFIG = {
     'p':2,
     'enough':0.4,
     'samples':128,
+    'seed': 10014,
     'far': 0.9,
     'loud': False
 }
@@ -66,6 +67,7 @@ class Sample:
     Sort tables by their mid values.
     """
     def __lt__(self,j):
+        print(1)
         return  Row(self.mid(),self) < Row(j.mid(), j)
 
     """
@@ -148,6 +150,7 @@ class Sample:
     :param row1: a row of data
     """
     def zitler(self, row1, row2):
+        print(2)
         goals = self.y
         s1, s2, e, n = 0, 0, 2.71828, len(goals)
         for goal in goals:
@@ -156,14 +159,14 @@ class Sample:
             y = goal.norm(row2[goal.at])
             s1 = s1 - e**(w * (x-y)/n)
             s2 = s2 - e**(w * (y-x)/n)
-        return -1 if (s1/n < s2/n) else 1
+        return s1/n < s2/n
     
     """
     Sorting rows using Zitler
     :return sorted: sorted rows
     """
     def sort(self):
-        return sorted(self.rows, key = cmp_to_key(self.zitler))
+        return sorted(self.rows) # key = cmp_to_key(self.zitler))
     
     """
     Find distance between two rows
@@ -204,9 +207,10 @@ class Sample:
     """
     def faraway(self, r, rows):
         # shuffled = random.sample(self.rows, CONFIG['samples'])
-        shuffled = random.sample(rows, math.floor(len(rows)/5))
+        n = min(128,len(rows))
+        shuffled = random.sample(rows, n) #math.floor(len(rows)/5))
         all = self.neighbors(r, shuffled)
-        return all[math.floor(CONFIG['far']*len(all))][1]
+        return all[math.floor(CONFIG['far']*n)][1]
     
     """
     Divide a sample into two based on distances
@@ -227,9 +231,9 @@ class Sample:
             rowPlusProjections.append((projection, row))
 
         rowPlusProjections = sorted(rowPlusProjections, key=lambda proj:proj[0])
-        mid = len(rows)/2
-        left = [proj[1] for proj in rowPlusProjections[0:math.floor(mid)]]
-        right = [proj[1] for proj in rowPlusProjections[math.floor(mid):]]
+        mid = int(len(rows)/2)
+        left = [proj[1] for proj in rowPlusProjections[:mid]]
+        right = [proj[1] for proj in rowPlusProjections[mid:]]
         return left, right
 
     """
@@ -293,10 +297,13 @@ class Row():
         
     def __lt__(self,j):
         "Does row1 win over row2?"
+        print(2)
         loss1, loss2, n = 0, 0, len(self.sample.y)
         for col in self.sample.y:
             a   = col.norm(self.cells[col.at])
             b   = col.norm(j.cells[col.at])  # bug fix: MUST be j.cells
-        loss1 -= math.e**(col.w * (a - b) / n)
-        loss2 -= math.e**(col.w * (b - a) / n)
+            loss1 -= math.e**(col.getWeight() * (a - b) / n)
+            loss2 -= math.e**(col.getWeight() * (b - a) / n)
+        for goal in self.sample.y:
+           print(goal.at, self.cells[goal.at], j.cells[goal.at], loss1/n < loss2/n)
         return loss1 / n < loss2 / n
