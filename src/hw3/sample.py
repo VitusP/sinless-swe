@@ -204,9 +204,10 @@ class Sample:
     """
     def faraway(self, r, rows):
         # shuffled = random.sample(self.rows, CONFIG['samples'])
-        shuffled = random.sample(rows, math.floor(len(rows)/5))
+        n = min(128,len(rows))
+        shuffled = random.sample(rows, n)
         all = self.neighbors(r, shuffled)
-        return all[math.floor(CONFIG['far']*len(all))][1]
+        return all[math.floor(CONFIG['far']*n)][1]
     
     """
     Divide a sample into two based on distances
@@ -297,6 +298,6 @@ class Row():
         for col in self.sample.y:
             a   = col.norm(self.cells[col.at])
             b   = col.norm(j.cells[col.at])  # bug fix: MUST be j.cells
-        loss1 -= math.e**(col.w * (a - b) / n)
-        loss2 -= math.e**(col.w * (b - a) / n)
+            loss1 -= math.e**(col.getWeight() * (a - b) / n)
+            loss2 -= math.e**(col.getWeight() * (b - a) / n)
         return loss1 / n < loss2 / n
