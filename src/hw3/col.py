@@ -153,25 +153,24 @@ class Num(Col):
         xys.sort(key=lambda index:index[0])
         # print(xys)
         listSplit = []
-        a = 0
-        b = 0
 
-        while len(xys) - a > myBinSize and a < len(xys) - 1:
-            if((len(xys)-1 <= b or xys[b][0] != xys[b + 1][0]) and (abs(a-b) > iota) and (len(xys) - b - 1 > myBinSize)):
-                tempList = []
-                for index in range(a, b + 1):
-                    tempList.append(xys[index])
-                a = b + 1
-                b = a + 1
-                listSplit.append(tempList)
-            elif b < len(xys):
-                b += 1
+        xys_size = len(xys)-1
+        
+        start = 0
+        end = 0
+
+        while start <= xys_size and end <= xys_size:
+            if((xys_size <= end or xys[end][0] != xys[end + 1][0]) and (abs(end-start) > iota) and (xys_size - end > myBinSize)):
+                start = end + 1
+                end = start + 1
+                listSplit.append(xys[start:end + 1])
+            elif end < len(xys):
+                end += 1
             else:
-                a += 1
-        finalList = []
-        for index in range(a, len(xys)):
-            finalList.append(xys[index])
-        listSplit.append(finalList)
+                start += 1
+
+        listSplit.append(xys[start:])
+
         return listSplit
 
 
