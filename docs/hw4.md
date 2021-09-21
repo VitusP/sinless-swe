@@ -28,11 +28,12 @@ def neighbors(self, r1, rows = {}):
 ```
 ```Python
 # faraway calculation
-def faraway(self, r):
-        shuffled = random.sample(self.rows, CONFIG['samples'])
+def faraway(self, r, rows):
+        # shuffled = random.sample(self.rows, CONFIG['samples'])
+        n = min(128,len(rows))
+        shuffled = random.sample(rows, n)
         all = self.neighbors(r, shuffled)
-        # [(print(x)) for x in all]
-        return all[math.floor(CONFIG['far']*len(all))][1]
+        return all[math.floor(CONFIG['far']*n)][1]
 ```
 ```Python
 # faraway calculation
@@ -45,8 +46,9 @@ def faraway(self, r):
 ```Python
 # Divide the rows based on distances
 def div1(self, rows):
-        one = self.faraway(rows[random.randrange(0, len(rows) - 1)])
-        two = self.faraway(one)
+        one = self.faraway(rows[random.randrange(0, len(rows) - 1)], rows)
+        # one = rows[random.randrange(0, len(rows) - 1)]
+        two = self.faraway(one, rows)
         c = self.dist(one, two)
 
         rowPlusProjections = []
@@ -58,22 +60,27 @@ def div1(self, rows):
 
         rowPlusProjections = sorted(rowPlusProjections, key=lambda proj:proj[0])
         mid = len(rows)/2
-        left = [proj[1] for proj in rowPlusProjections[1:math.floor(mid)]]
-        right = [proj[1] for proj in rowPlusProjections[math.floor(mid) + 1:]]
+        left = [proj[1] for proj in rowPlusProjections[0:math.floor(mid)]]
+        right = [proj[1] for proj in rowPlusProjections[math.floor(mid):]]
         return left, right
 
-    def recursive_divs(self, leafs, enough, rows, lvl):
+def recursive_divs(self, leafs, enough, rows, lvl):
         if CONFIG['loud']:
             pass
-
         if len(rows) < 2 * enough:
-            leafs.append(rows)
+            # Add leaf to Sample
+            tempSample = self.clone()
+            for row in rows:
+                tempSample.add(row)
+            self.printGoals(tempSample, lvl + 1)
+            leafs.append(tempSample)          
         else:
+            self.printDendogram(rows, lvl + 1)
             l,r = self.div1(rows)
             self.recursive_divs(leafs, enough, l, lvl + 1)
             self.recursive_divs(leafs, enough, r, lvl + 1)
 
-    def divs(self):
+def divs(self):
         leafs = []
         enough = pow(len(self.rows), CONFIG['enough'])
         self.recursive_divs(leafs, enough, self.rows, 0)
