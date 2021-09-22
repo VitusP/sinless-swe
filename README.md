@@ -1,7 +1,7 @@
 # **sinless-swe**
 
 [![DOI](https://zenodo.org/badge/398059464.svg)](https://zenodo.org/badge/latestdoi/398059464)</br></br>
-<img alt="Python" src="https://warehouse-camo.ingress.cmh1.psfhosted.org/642edfbd80afb6463693f2316ebc02187a0f0502/68747470733a2f2f696d672e736869656c64732e696f2f707970692f707976657273696f6e732f7079746573742e737667"></br></br>
+<img alt="Python" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Blue_Python_3.9_Shield_Badge.svg"></br></br>
 <a href="https://github.com/timm/keys/blob/master/LICENSE.md"><img 
 alt="License" src="https://img.shields.io/badge/license-MIT-green"></a> </br><img 
 src="https://img.shields.io/badge/purpose-AI%2C%20SWE-yellow"> </br></br>
