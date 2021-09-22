@@ -28,10 +28,6 @@ clusters = sorted(leafs)
 for sample in clusters:
     print(sample.ys())
 
-for leaf in leafs:
-     print(leaf)
-     print("-------------")
-
 worst, best = clusters[-1], clusters[0] # as done above
 
 
