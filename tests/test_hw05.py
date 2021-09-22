@@ -24,17 +24,17 @@ samp = Sample.read("data/auto93.csv")
 leafs = samp.divs()
 clusters = sorted(leafs)
 
-"""
+
 for sample in clusters:
     print(sample.ys())
 
 for leaf in leafs:
      print(leaf)
      print("-------------")
-"""
+
 worst, best = clusters[-1], clusters[0] # as done above
 
-"""
+
 print("worst: ",worst.ys())
 for row in worst.rows:
     print(row)
@@ -42,7 +42,6 @@ print("best: ",best.ys())
 for row in best.rows:
     print(row)
 print()
-"""
 
 for good,bad in zip(best.x,worst.x): 
     for d in good.discretize(bad, Config()):
