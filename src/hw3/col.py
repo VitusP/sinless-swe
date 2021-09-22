@@ -132,6 +132,8 @@ class Num(Col):
         best, rest = 1,0
         # list of (number, class)
         xys=[(good,best) for good in self.getAll()] + [ (bad, rest) for bad  in j.getAll()]
+        # for row in xys:
+        #     print(row)
         #
         # find a minimum break span (.3 * expected value of standard deivation)
         n1,n2 = len(self.getAll()), len(j.getAll())
@@ -139,7 +141,7 @@ class Num(Col):
         iota = my.cohen * (self.var()*n1 + j.var()*n2) / (n1 + n2)
         #
         # all the real work is in unsuper and merge... which is your problem
-        ## TODO: Merge method and unsuper method.
+        # Merge method and unsuper method.
         ranges = self.merge(self.unsuper(xys, len(xys)**my.bins, iota))
         # 
         if len(ranges) > 1:  
@@ -151,7 +153,8 @@ class Num(Col):
     def unsuper(self, xys, myBinSize, iota):
         # sort xys
         xys.sort(key=lambda index:index[0])
-        # print(xys)
+        # for row in xys:
+        #     print(row)
         listSplit = []
 
         xys_size = len(xys)-1
@@ -161,43 +164,58 @@ class Num(Col):
 
         while start <= xys_size and end <= xys_size:
             if((xys_size <= end or xys[end][0] != xys[end + 1][0]) and (abs(end-start) > iota) and (xys_size - end > myBinSize)):
+                listSplit.append(xys[start:end + 1])
                 start = end + 1
                 end = start + 1
-                listSplit.append(xys[start:end + 1])
             elif end < len(xys):
                 end += 1
             else:
                 start += 1
 
         listSplit.append(xys[start:])
-
+        for row in listSplit:
+            print(row)
         return listSplit
 
 
     def merge(self, item):
         index = 0
+        possibleCluster = []
         while index < len(item) - 1:
             a, b = item[index], item[index + 1]
             c = a + b
             # print("a:", a)
-            varianceA = self.getVariance(a)
-            varianceB = self.getVariance(b)
-            varianceC = self.getVariance(c)
+            varianceA = self.getVar(a)
+            varianceB = self.getVar(b)
+            varianceC = self.getVar(c)
+            print("Variance a: ", varianceA)
+            print("Variance b: ", varianceB)
+            print("Variance C: ", varianceC*.95)
+            print("Variance a + b: ", (varianceA*len(a) + varianceB*len(b))/(len(a) + len(b)))
             if (varianceC*.95) <= (varianceA*len(a) + varianceB*len(b))/(len(a) + len(b)):
-                item[index] = item[index] + item[index+1]
-                item.pop(index+1)
+                # item[index] = item[index] + item[index+1]
+                # item.pop(index+1)
+                print("Merge: ", item[index])
+                print("Merge: ",item[index + 1])
+                possibleCluster.append(item[index] + item[index+1])
+                index +=2
             else:
+                possibleCluster.append(item[index])
                 index += 1
+        # handle last group
+        if index == len(item) - 1:
+            possibleCluster.append(item[index])
+        # Recursive merge
+        if len(possibleCluster) < len(item):
+            return self.merge(possibleCluster)
         return item
 
     def var(self):
         return self.sd
     
-    def getVariance(self, listTuple):
-        temp = []
-        for val in listTuple:
-            temp.append(val[0])
-        return statistics.variance(temp)
+    def getVar(self, listTuple):
+        n = len(listTuple)
+        return listTuple[ int(.9*n) ][0] - listTuple[ int(.1*n) ][0] / 2.56
     
     def getLowestorHighestFromTuple(self, listTuple, minTrue):
         temp = []
