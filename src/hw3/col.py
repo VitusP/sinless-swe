@@ -188,15 +188,15 @@ class Num(Col):
             varianceA = self.getVar(a)
             varianceB = self.getVar(b)
             varianceC = self.getVar(c)
-            print("Variance a: ", varianceA)
-            print("Variance b: ", varianceB)
-            print("Variance C: ", varianceC*.95)
-            print("Variance a + b: ", (varianceA*len(a) + varianceB*len(b))/(len(a) + len(b)))
+            # print("Variance a: ", varianceA)
+            # print("Variance b: ", varianceB)
+            # print("Variance C: ", varianceC*.95)
+            # print("Variance a + b: ", (varianceA*len(a) + varianceB*len(b))/(len(a) + len(b)))
             if (varianceC*.95) <= (varianceA*len(a) + varianceB*len(b))/(len(a) + len(b)):
                 # item[index] = item[index] + item[index+1]
                 # item.pop(index+1)
-                print("Merge: ", item[index])
-                print("Merge: ",item[index + 1])
+                # print("Merge: ", item[index])
+                # print("Merge: ",item[index + 1])
                 possibleCluster.append(item[index] + item[index+1])
                 index +=2
             else:
