@@ -38,6 +38,7 @@ class Sym(Col):
         self.has = {}
         self.most = 0
         self.mode = 0
+        self.n = 0 #Not usable for now.
     
     def mid(self):
         return self.mode
@@ -58,7 +59,8 @@ class Sym(Col):
         "Query: `Return values seen in  i` is good and `j` is bad"
         for x in set(self.has | j.has): # for each key in either group
             yield o(at=self.at, name=self.name, lo=x, hi=x, 
-                best= self.has.get(x,0), rest=j.has.get(x,0))
+                best= self.has.get(x,0), bests=self.n, rest=j.has.get(x,0),
+                rests = j.n, first = False, last= False)
 
     def merge(self,j):
         "Copy: merge two symbol counters"
@@ -148,7 +150,8 @@ class Num(Col):
             for r in ranges:
                 # print("ranges: ", r)
                 yield o(at=self.at, name=self.name, lo=self.getLowestorHighestFromTuple(r, True), hi=self.getLowestorHighestFromTuple(r, False), 
-                        best= self.getBestorRestfromTuple(r,best), rest=self.getBestorRestfromTuple(r,rest))
+                        best= self.getBestorRestfromTuple(r,best), bests=self.n, rest=self.getBestorRestfromTuple(r,rest), rests = j.n,
+                        first = r==0, last = r == len(ranges)-1)
     
     def unsuper(self, xys, myBinSize, iota):
         # sort xys
