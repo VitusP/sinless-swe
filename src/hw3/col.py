@@ -22,6 +22,19 @@ class Col:
     def add(self, x):
         pass
 
+    def match(i, bin, row):
+        v=row.cells[bin.at]              # Q: where does `at` come from?
+        if   v=="?"   : return True      # Q: what should we do for missing values
+        elif bin.first: return v <= bin.hi
+        elif bin.last : return v >= bin.lo
+        else          : return bin.lo <= v <= bin.hi
+
+    def show(i,bin):
+        if   bin.lo == bin.hi: return f"{bin.name} == {bin.lo}"  # Q: how we detect symbolic ranges
+        elif bin.first: return f"{bin.name} <= {bin.hi}"
+        elif bin.last : return f"{bin.name} >= {bin.lo}"
+        else          : return f"{bin.lo} <= {bin.name} <= {bin.hi}"
+
 """
 Skip class implementation
 """
