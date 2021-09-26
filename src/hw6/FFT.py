@@ -27,7 +27,15 @@ class FFT():
         worstIdea  = self.values("", bins)[-1][1]
         pre = "|.. " *level
         
-        
+        for yes,no,idea in [(1,0,bestIdea), (0,1,worstIdea)]:
+            leaf,tree = all.clone(), all.clone()
+            for row in all.rows:
+                if self.match(idea, row):
+                    leaf.add(row)
+                else:
+                    tree.add(row)
+        b1 = copy(branch)
+
         pass
     
     def match(self, bin, row):
@@ -52,4 +60,5 @@ class FFT():
   
     def values(self,rule,bins):
         bins = [(self.value(rule,bin), bin) for bin in bins]
-        return sorted([(n,bin) for n,bin in bins if n > 0], key=first) #What is the first here? It should be a sorting rule
+        tmp = [(n,bin) for n,bin in bins if n > 0]
+        return sorted(tmp, key=tmp[0]) #What is the first here? It should be a sorting rule
