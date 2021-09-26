@@ -120,6 +120,12 @@ class Num(Col):
     def getAll(self):
         return self.all
 
+    def getLow(self):
+        return self.lo
+
+    def getHigh(self):
+        return self.hi
+
     def dist(self, x, y):
         if x == '?':
             y = self.norm(y)
