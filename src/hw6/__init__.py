@@ -1,3 +1,3 @@
 from .FFT import FFT
 
-__All__ = [FFT]
+__all__ = [FFT]

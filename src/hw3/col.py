@@ -184,8 +184,8 @@ class Num(Col):
                 start += 1
 
         listSplit.append(xys[start:])
-        for row in listSplit:
-            print(row)
+        # for row in listSplit:
+        #     print(row)
         return listSplit
 
 
