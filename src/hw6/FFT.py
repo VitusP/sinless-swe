@@ -1,9 +1,33 @@
 from hw3.col import o
+from copy import copy
+
+"""
+    all : Seems like a Sample.
+    bin : Seems like a Col.
+
+"""
 
 class FFT():
     def __init__(self, all, conf, branch,branches,stop = None, level=0):
+
+        branch = branch or []
+        branches = branches or []
+
         self.my = conf
         stop = stop or 2*len(all.rows)**self.my.bins
+        
+        tmp = all.clone().divs()
+        
+        best, rest = tmp[0], tmp[-1]
+
+        bins = [bin for xbest,xrest in zip(best.x, rest.x) 
+                for bin in xbest.discretize(xrest, self.my)]
+
+        bestIdea   = self.values("", bins)[-1][1]
+        worstIdea  = self.values("", bins)[-1][1]
+        pre = "|.. " *level
+        
+        
         pass
     
     def match(self, bin, row):
@@ -28,4 +52,4 @@ class FFT():
   
     def values(self,rule,bins):
         bins = [(self.value(rule,bin), bin) for bin in bins]
-        return sorted([(n,bin) for n,bin in bins if n > 0], key=first) #What is the first here?
+        return sorted([(n,bin) for n,bin in bins if n > 0], key=first) #What is the first here? It should be a sorting rule
