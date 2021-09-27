@@ -45,7 +45,11 @@ for good,bad in zip(best.x,worst.x):
        print(d)
     print()
 print("HW6*********************************************************")
-FFT(samp, Config(), [],[])
+branches = []
+branch = []
+FFT(samp, Config(), branch, branches)
+for b in branches:
+    [print(val) for val in b]
 
 
 

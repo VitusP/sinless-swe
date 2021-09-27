@@ -51,8 +51,10 @@ class Sym(Col):
 
     def add(self, x):
         if x in self.has.keys():
+            self.n += 1
             self.has[x] = 1 + self.has.get(x,0)
         else:
+            self.n += 1
             self.has[x] = 1
 
         if self.has[x] > self.most:
@@ -182,8 +184,8 @@ class Num(Col):
                 start += 1
 
         listSplit.append(xys[start:])
-        for row in listSplit:
-            print(row)
+        # for row in listSplit:
+        #     print(row)
         return listSplit
 
 
