@@ -22,6 +22,12 @@ class Col:
     def add(self, x):
         pass
 
+    def match():
+        pass
+
+    def show():
+        pass
+
 """
 Skip class implementation
 """
@@ -38,7 +44,7 @@ class Sym(Col):
         self.has = {}
         self.most = 0
         self.mode = 0
-        self.n = 0
+        self.n = 0 #Not usable for now.
     
     def mid(self):
         return self.mode
@@ -51,8 +57,6 @@ class Sym(Col):
 
         if self.has[x] > self.most:
             self.most, self.mode = self.has[x], x
-
-        self.n += 1
     
     def dist(self, x, y):
         return 0 if x == y else 1
@@ -120,12 +124,6 @@ class Num(Col):
     def getAll(self):
         return self.all
 
-    def getLow(self):
-        return self.lo
-
-    def getHigh(self):
-        return self.hi
-
     def dist(self, x, y):
         if x == '?':
             y = self.norm(y)
@@ -184,8 +182,8 @@ class Num(Col):
                 start += 1
 
         listSplit.append(xys[start:])
-        # for row in listSplit:
-        #     print(row)
+        for row in listSplit:
+            print(row)
         return listSplit
 
 
@@ -244,8 +242,10 @@ class Num(Col):
         return counter
 
 class o:
-  """`o` is just a class that can print itself (hiding "private" keys)
-  and which can hold methods."""
-  def __init__(self, **d)  : self.__dict__.update(d)
-  def __repr__(self) : return "{"+ ', '.join( 
-    [f":{k} {v}" for k, v in self.__dict__.items() if  k[0] != "_"])+"}"
+    """`o` is just a class that can print itself (hiding "private" keys)
+    and which can hold methods."""
+    def __init__(self, **d)  : self.__dict__.update(d)
+    def __repr__(self) : return "{"+ ', '.join( 
+        [f":{k} {v}" for k, v in self.__dict__.items() if  k[0] != "_"])+"}"
+    def __getitem__(self, key):
+        return self.__dict__[key]
