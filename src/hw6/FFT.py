@@ -1,5 +1,5 @@
 from src.hw3.col import o
-from copy import copy
+from copy import deepcopy
 
 """
     all : Seems like a Sample.
@@ -17,33 +17,38 @@ class FFT():
         for row in all.rows:
             tmp.add(row)
         tmp = tmp.divs()
-        
-        best, rest = tmp[0], tmp[-1]
+        tmp = sorted(tmp)
 
+        best, rest = tmp[0], tmp[-1]
         bins = [bin for xbest,xrest in zip(best.x, rest.x) 
                 for bin in xbest.discretize(xrest, self.my)]
 
-        bestIdea   = self.values("plan", bins)[-1][1]
-        worstIdea  = self.values("monitor", bins)[-1][1]
-        pre = "|.. " *level
+        bestIdea = None
+        worstIdea = None
+        # print("bins", bins)
+        if (len(bins) > 1):
+            bestIdea   = self.values("plan", bins)[-1][1]
+            worstIdea  = self.values("monitor", bins)[-1][1]
         
-        for yes,no,idea in [(1,0,bestIdea), (0,1,worstIdea)]:
-            leaf,tree = all.clone(), all.clone()
-            for row in all.rows:
-                if self.match(idea, row):
-                    leaf.add(row)
+            for yes,no,idea in [(1,0,bestIdea), (0,1,worstIdea)]:
+                leaf,tree = all.clone(), all.clone()
+                for row in all.rows:
+                    if self.match(idea, row):
+                        leaf.add(row)
+                    else:
+                        tree.add(row)
+                b1 = deepcopy(branch)
+                b1 += [o(at=idea.at, lo=idea.lo, hi=idea.hi,
+                                type=yes, txt="if "+self.show(idea)+" then", 
+                                then=leaf.ys(), n=len(leaf.rows))]
+                print("b1: ", b1)
+                if len(tree.rows) <= stop:
+                    b1  += [o(type=no, txt="  ", then=tree.ys(), n= len(tree.rows))]
+                    branches += [b1]
                 else:
-                    tree.add(row)
-        b1 = copy(branch)
-        b1 += [o(at=idea.at, lo=idea.lo, hi=idea.hi,
-                          type=yes, txt="if "+self.show(idea)+" then", 
-                          then=leaf.ys(), n=len(leaf.rows))]
-        if len(tree.rows) <= stop:
-            b1  += [o(type=no, txt="  ", then=tree.ys(), n= len(tree.rows))]
-            branches += [b1]
-        else:
-            FFT(tree,conf,b1,branches,stop=stop,level=level+1)
-        pass
+                    print("Recurse FFT")
+                    FFT(tree,conf,b1,branches,stop=stop,level=level+1)
+            
     
     def match(self, bin, row):
         # print("row: ", row)

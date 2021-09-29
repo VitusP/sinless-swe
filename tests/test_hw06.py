@@ -48,9 +48,15 @@ print("HW6*********************************************************")
 branches = []
 branch = []
 FFT(samp, Config(), branch, branches)
-for b in branches:
-    [print(val) for val in b]
 
+for i, b in enumerate(branches):
+    print("tree: ", i)
+    for k,val in enumerate(b):
+        if len(b) - 1 == k:
+            print(val['type'], '  else: ', val['then'], '(n:', val['n'], ')')
+        else:
+            print(val['type'], ' ', val['txt'], '', val['then'], '(n:', val['n'], ')')
+   
 
 
 
