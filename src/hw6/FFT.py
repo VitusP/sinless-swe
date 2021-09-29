@@ -26,10 +26,13 @@ class FFT():
         bestIdea = None
         worstIdea = None
         # print("bins", bins)
-        if (len(bins) > 1):
-            bestIdea   = self.values("plan", bins)[-1][1]
-            worstIdea  = self.values("monitor", bins)[-1][1]
-        
+        bestValues = self.values("plan", bins)
+        worstValues = self.values("monitor", bins)
+
+        if len(bestValues)>0 and len(worstValues)>0:
+            bestIdea   = bestValues[-1][1]
+            worstIdea  = worstValues[-1][1]
+            
             for yes,no,idea in [(1,0,bestIdea), (0,1,worstIdea)]:
                 leaf,tree = all.clone(), all.clone()
                 for row in all.rows:
@@ -41,12 +44,13 @@ class FFT():
                 b1 += [o(at=idea.at, lo=idea.lo, hi=idea.hi,
                                 type=yes, txt="if "+self.show(idea)+" then", 
                                 then=leaf.ys(), n=len(leaf.rows))]
-                print("b1: ", b1)
+                # print("b1: ", b1)
+                # print("len of tree rows: ", len(tree.rows))
                 if len(tree.rows) <= stop:
                     b1  += [o(type=no, txt="  ", then=tree.ys(), n= len(tree.rows))]
                     branches += [b1]
                 else:
-                    print("Recurse FFT")
+                    # print("Recurse FFT")
                     FFT(tree,conf,b1,branches,stop=stop,level=level+1)
             
     
@@ -76,4 +80,5 @@ class FFT():
         tmp = [(n,bin) for n,bin in bins if n > 0]
         # for val in tmp:
         #     print("values: ", val)
+        print("length of tmp: ", len(tmp))
         return sorted(tmp, key=lambda tuple: tuple[0]) #What is the first here? It should be a sorting rule

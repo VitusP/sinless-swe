@@ -248,10 +248,10 @@ class Sample:
             tempSample = self.clone()
             for row in rows:
                 tempSample.add(row)
-            self.printGoals(tempSample, lvl + 1)
+            # self.printGoals(tempSample, lvl + 1)
             leafs.append(tempSample)          
         else:
-            self.printDendogram(rows, lvl + 1)
+            # self.printDendogram(rows, lvl + 1)
             l,r = self.div1(rows)
             self.recursive_divs(leafs, enough, l, lvl + 1)
             self.recursive_divs(leafs, enough, r, lvl + 1)
