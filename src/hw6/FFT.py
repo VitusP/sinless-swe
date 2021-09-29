@@ -80,5 +80,5 @@ class FFT():
         tmp = [(n,bin) for n,bin in bins if n > 0]
         # for val in tmp:
         #     print("values: ", val)
-        print("length of tmp: ", len(tmp))
+        # print("length of tmp: ", len(tmp))
         return sorted(tmp, key=lambda tuple: tuple[0]) #What is the first here? It should be a sorting rule
