@@ -11,7 +11,7 @@ class Config:
     samples=128
     far= 0.9
     loud=False
-    cohen=.3
+    cohen=.35
     bins = .5
     support = 2
 
