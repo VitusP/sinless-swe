@@ -271,6 +271,7 @@ class Sample:
     :param lvl: depth of the tree
     """
     def printDendogram(self, leaf, lvl):
+        # print("leaf: ", leaf)
         one = self.faraway(leaf[random.randrange(0, len(leaf) - 1)], leaf)
         two = self.faraway(one, leaf)
         c = self.dist(one, two)

@@ -22,6 +22,12 @@ class Col:
     def add(self, x):
         pass
 
+    def match():
+        pass
+
+    def show():
+        pass
+
 """
 Skip class implementation
 """
@@ -38,14 +44,17 @@ class Sym(Col):
         self.has = {}
         self.most = 0
         self.mode = 0
+        self.n = 0 #Not usable for now.
     
     def mid(self):
         return self.mode
 
     def add(self, x):
         if x in self.has.keys():
+            self.n += 1
             self.has[x] = 1 + self.has.get(x,0)
         else:
+            self.n += 1
             self.has[x] = 1
 
         if self.has[x] > self.most:
@@ -58,7 +67,8 @@ class Sym(Col):
         "Query: `Return values seen in  i` is good and `j` is bad"
         for x in set(self.has | j.has): # for each key in either group
             yield o(at=self.at, name=self.name, lo=x, hi=x, 
-                best= self.has.get(x,0), rest=j.has.get(x,0))
+                best= self.has.get(x,0), bests=self.n, rest=j.has.get(x,0),
+                rests = j.n, first = False, last= False)
 
     def merge(self,j):
         "Copy: merge two symbol counters"
@@ -148,7 +158,8 @@ class Num(Col):
             for r in ranges:
                 # print("ranges: ", r)
                 yield o(at=self.at, name=self.name, lo=self.getLowestorHighestFromTuple(r, True), hi=self.getLowestorHighestFromTuple(r, False), 
-                        best= self.getBestorRestfromTuple(r,best), rest=self.getBestorRestfromTuple(r,rest))
+                        best= self.getBestorRestfromTuple(r,best), bests=self.n, rest=self.getBestorRestfromTuple(r,rest), rests = j.n,
+                        first = r==0, last = r == len(ranges)-1)
     
     def unsuper(self, xys, myBinSize, iota):
         # sort xys
@@ -173,8 +184,8 @@ class Num(Col):
                 start += 1
 
         listSplit.append(xys[start:])
-        for row in listSplit:
-            print(row)
+        # for row in listSplit:
+        #     print(row)
         return listSplit
 
 
@@ -233,8 +244,10 @@ class Num(Col):
         return counter
 
 class o:
-  """`o` is just a class that can print itself (hiding "private" keys)
-  and which can hold methods."""
-  def __init__(self, **d)  : self.__dict__.update(d)
-  def __repr__(self) : return "{"+ ', '.join( 
-    [f":{k} {v}" for k, v in self.__dict__.items() if  k[0] != "_"])+"}"
+    """`o` is just a class that can print itself (hiding "private" keys)
+    and which can hold methods."""
+    def __init__(self, **d)  : self.__dict__.update(d)
+    def __repr__(self) : return "{"+ ', '.join( 
+        [f":{k} {v}" for k, v in self.__dict__.items() if  k[0] != "_"])+"}"
+    def __getitem__(self, key):
+        return self.__dict__[key]
