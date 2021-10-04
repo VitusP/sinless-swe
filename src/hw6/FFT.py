@@ -45,7 +45,8 @@ class FFT():
                                 type=yes, txt="if "+self.show(idea)+" then", 
                                 then=leaf.ys(), n=len(leaf.rows))]
                 # print("b1: ", b1)
-                # print("len of tree rows: ", len(tree.rows))
+                # print("len of tree rows: ", len(tree.rows)) [1909.9, 17.9, 35.6]
+                print(stop)
                 if len(tree.rows) <= stop:
                     b1  += [o(type=no, txt="  ", then=tree.ys(), n= len(tree.rows))]
                     branches += [b1]

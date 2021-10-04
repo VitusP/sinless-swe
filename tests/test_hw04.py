@@ -19,7 +19,7 @@ def testSampleDistance():
 def testSampFaraway():
     # Set the right file system
     dataPath = os.path.dirname(os.path.abspath(__file__))
-    dataPath = dataPath[:dataPath.rindex("/")]
+    #dataPath = dataPath[:dataPath.rindex("/")]
 
     # Call Sample
     samp2 = Sample.read("data/auto93.csv")
