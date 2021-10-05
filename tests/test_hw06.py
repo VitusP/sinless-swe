@@ -4,16 +4,10 @@ import sys
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 from src.hw3 import Sample
 from src.hw6 import FFT
+from src.hw7 import Config
 
-class Config:
-    p=2
-    enough=0.4
-    samples=128
-    far= 0.9
-    loud=False
-    cohen=.35
-    bins = .5
-    support = 2
+conf = Config()
+conf.build
 
 # Set the right file system
 dataPath = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +15,7 @@ dataPath = os.path.dirname(os.path.abspath(__file__))
 
 # Call Sample
 samp = Sample.read("data/auto93.csv")
+samp.use_config(conf)
 
 leafs = samp.divs()
 clusters = sorted(leafs)
@@ -41,13 +36,13 @@ for row in best.rows:
 print()
 
 for good,bad in zip(best.x,worst.x): 
-    for d in good.discretize(bad, Config()):
+    for d in good.discretize(bad, conf):
        print(d)
     print()
 print("HW6*********************************************************")
 branches = []
 branch = []
-FFT(samp, Config(), branch, branches)
+FFT(samp, conf, branch, branches)
 
 for i, b in enumerate(branches):
     print("tree: ", i)

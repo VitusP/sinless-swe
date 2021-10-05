@@ -76,12 +76,17 @@ class Sample:
     """
     @staticmethod
     def read(filePath):
-        sample = Sample([], Config().build())
+        conf = Config()
+        conf.build()
+        sample = Sample([], conf)
         cleanedData = csv_reader(filePath) # Read csv data from given path
         for row in cleanedData: # Add each row to the Sample
             sample.add(row)
         return sample
     
+    def use_config(self, conf):
+        self.config = conf
+
     """
     Add each row to the Sample class
     :param lst: a row of data
@@ -181,8 +186,8 @@ class Sample:
             if a=='?' and b=='?':
                 d = d + 1
             else:
-                d = d + col.dist(a, b)**self.config['p']
-        return (d/n)**(1/self.config['p'])
+                d = d + col.dist(a, b)**self.config.p
+        return (d/n)**(1/self.config.p)
     
     """
     Get tuple of neighbor of row r1 and the 
@@ -209,7 +214,7 @@ class Sample:
         n = min(128,len(rows))
         shuffled = random.sample(rows, n)
         all = self.neighbors(r, shuffled)
-        return all[math.floor(self.config['far']*n)][1]
+        return all[math.floor(self.config.far*n)][1]
     
     """
     Divide a sample into two based on distances
@@ -261,7 +266,7 @@ class Sample:
     """
     def divs(self):
         leafs = []
-        enough = pow(len(self.rows), self.config['enough'])
+        enough = pow(len(self.rows), self.config.enough)
         self.recursive_divs(leafs, enough, self.rows, 0)
         return leafs
 
