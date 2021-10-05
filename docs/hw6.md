@@ -106,6 +106,8 @@ Cylinders,Displacement,Horsepower,Weight-,Acceleration+,Model,Origin,Mpg+
 ```
 Here are the output for HW6 functions </br>
 ### FFT:
+Below is the result of our fft generation. We have 27 leafs in total for this experiment, and the best trees seems to be 
+a 000001 tree. The best tree has Weight-,Mpg+,Acc+,N+ of 1937.1, 17.8, 34.8, and n: 21 respectively.
 ```
 tree:  0
 1   if origin == 3 then  [2221.2, 16.2, 30.1] (n: 79 )

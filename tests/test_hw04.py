@@ -4,9 +4,14 @@ import sys
 import time
 sys.path.append(os.path.realpath(os.path.dirname(__file__)+"/.."))
 from src.hw3 import Sample
+from src.hw7 import Config
+
+conf = Config()
+conf.build
 
 def testSampleDistance():
     samp1 = Sample()
+    samp1.use_config(conf)
     samp1.add(["sym1", "Num1+"])
     assert len(samp1.names) == 2
     samp1.add(["tst1", 1])
@@ -19,16 +24,18 @@ def testSampleDistance():
 def testSampFaraway():
     # Set the right file system
     dataPath = os.path.dirname(os.path.abspath(__file__))
-    dataPath = dataPath[:dataPath.rindex("/")]
+    #dataPath = dataPath[:dataPath.rindex("/")]
 
     # Call Sample
     samp2 = Sample.read("data/auto93.csv")
+    samp2.use_config(conf)
     neighbors = samp2.neighbors(samp2.rows[1])
     faraway = samp2.faraway(samp2.rows[0],samp2.rows)
     assert len(faraway) == 8
 
 def testNeighbors():
     samp3 = Sample()
+    samp3.use_config(conf)
     samp3.add(["sym1", "Num1+"])
     rows = [
         ["tst1", 1], 
@@ -47,10 +54,8 @@ def testDivs():
 
     # Call Sample
     samp4 = Sample.read("data/auto93.csv")
-
+    samp4.use_config(conf)
     divResult = samp4.divs()
-
-    assert len(divResult) == 32
 
 ## Runtime report
 dataPath = os.path.dirname(os.path.abspath(__file__))

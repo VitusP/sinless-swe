@@ -7,6 +7,7 @@ import math
 
 from .col import Num, Sym, Skip
 from src.hw2 import csv_reader
+from src.hw7 import Config
 from functools import cmp_to_key
 
 """
@@ -50,7 +51,8 @@ class Sample:
     """
     Sample constructors
     """
-    def __init__(self, initialized = []):
+    def __init__(self, initialized = [], conf = None):
+        self.config = conf
         self.hasHeader = False
         self.cols = [] # List of tuples for columns
         self.rows = [] # List of rows
@@ -74,12 +76,17 @@ class Sample:
     """
     @staticmethod
     def read(filePath):
-        sample = Sample()
+        conf = Config()
+        conf.build()
+        sample = Sample([], conf)
         cleanedData = csv_reader(filePath) # Read csv data from given path
         for row in cleanedData: # Add each row to the Sample
             sample.add(row)
         return sample
     
+    def use_config(self, conf):
+        self.config = conf
+
     """
     Add each row to the Sample class
     :param lst: a row of data
@@ -125,7 +132,7 @@ class Sample:
     :return Sample: Sample class
     """
     def clone(self):
-        newSample = Sample([self.names])
+        newSample = Sample([self.names], self.config)
         return newSample
 
     """
@@ -179,8 +186,8 @@ class Sample:
             if a=='?' and b=='?':
                 d = d + 1
             else:
-                d = d + col.dist(a, b)**CONFIG['p']
-        return (d/n)**(1/CONFIG['p'])
+                d = d + col.dist(a, b)**self.config.p
+        return (d/n)**(1/self.config.p)
     
     """
     Get tuple of neighbor of row r1 and the 
@@ -207,7 +214,7 @@ class Sample:
         n = min(128,len(rows))
         shuffled = random.sample(rows, n)
         all = self.neighbors(r, shuffled)
-        return all[math.floor(CONFIG['far']*n)][1]
+        return all[math.floor(self.config.far*n)][1]
     
     """
     Divide a sample into two based on distances
@@ -241,8 +248,6 @@ class Sample:
     :param lvl: depth of the tree
     """
     def recursive_divs(self, leafs, enough, rows, lvl):
-        if CONFIG['loud']:
-            pass
         if len(rows) < 2 * enough:
             # Add leaf to Sample
             tempSample = self.clone()
@@ -261,7 +266,7 @@ class Sample:
     """
     def divs(self):
         leafs = []
-        enough = pow(len(self.rows), CONFIG['enough'])
+        enough = pow(len(self.rows), self.config.enough)
         self.recursive_divs(leafs, enough, self.rows, 0)
         return leafs
 
