@@ -7,7 +7,7 @@ from src.hw6 import FFT
 from src.hw7 import Config
 
 conf = Config()
-conf.build
+conf.build()
 
 # Set the right file system
 dataPath = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +43,6 @@ print("HW6*********************************************************")
 branches = []
 branch = []
 FFT(samp, conf, branch, branches)
-
 for i, b in enumerate(branches):
     print("tree: ", i)
     for k,val in enumerate(b):
@@ -51,6 +50,8 @@ for i, b in enumerate(branches):
             print(val['type'], '  else: ', val['then'], '(n:', val['n'], ')')
         else:
             print(val['type'], ' ', val['txt'], '', val['then'], '(n:', val['n'], ')')
+# Print config
+print("Hyperparameter: ", conf.getHyperparameters())
    
 
 
