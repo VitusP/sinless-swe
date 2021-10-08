@@ -74,6 +74,8 @@ class FFT():
         rules = o(plan    = lambda b,r: b**s/(b+r) if b>r else 0,  # good things to make you smile
                 monitor = lambda b,r: r**s/(b+r) if r>b else 0,  # bad things to make your cry.
                 novel   = lambda b,r: 1/(b+r))                   # Q: when would i select for "novel"?
+        if bin.rests == 0 or bin.bests == 0:
+            return rules[rule](bin.best, bin.rest)
         return rules[rule](bin.best/bin.bests, bin.rest/bin.rests)
   
     def values(self,rule,bins):
