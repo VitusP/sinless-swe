@@ -1,3 +1,4 @@
+import random
 from src.hw3.col import o
 from copy import deepcopy
 
@@ -47,7 +48,8 @@ class FFT():
                 # print("b1: ", b1)
                 # print("len of tree rows: ", len(tree.rows)) [1909.9, 17.9, 35.6]
                 # print(stop)
-                if len(tree.rows) <= stop:
+                # print(len(tree.rows), stop)
+                if len(tree.rows) <= stop or level > random.randrange(5,9,1):
                     b1  += [o(type=no, txt="  ", then=tree.ys(), n= len(tree.rows))]
                     branches += [b1]
                 else:
@@ -74,6 +76,7 @@ class FFT():
         rules = o(plan    = lambda b,r: b**s/(b+r) if b>r else 0,  # good things to make you smile
                 monitor = lambda b,r: r**s/(b+r) if r>b else 0,  # bad things to make your cry.
                 novel   = lambda b,r: 1/(b+r))                   # Q: when would i select for "novel"?
+
         if bin.rests == 0 or bin.bests == 0:
             return rules[rule](bin.best, bin.rest)
         return rules[rule](bin.best/bin.bests, bin.rest/bin.rests)

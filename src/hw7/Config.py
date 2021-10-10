@@ -10,11 +10,11 @@ class Config:
         self.listOfHyperParams = [self.p, self.enough, self.samples, self.far, self.cohen, self.bins, self.support]
         self.bond = {
         'p': (2, 3),
-        'enough': (0.2, 0.7),
+        'enough': (0.1, 0.9),
         'samples': (6, 8),
         'far':  (0.5, .9),
-        'cohen': (0.1, 0.5),
-        'bins': (0.4, 0.7),
+        'cohen': (0.1, 0.9),
+        'bins': (0.1, 0.5),
         'support': (2,4),
         }
 

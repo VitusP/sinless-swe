@@ -8,9 +8,9 @@ from copy import copy
 
 class HyperOptimizer:
 
-    def __init__(self, sampleName, r=20) :
+    def __init__(self, sample, r=20) :
         self.r = r
-        self.sample = Sample.read(sampleName) # Sample data
+        self.sample = sample
         self.treeSets = []
         self.samples = []
         self.bestHyperparameter = [0]
@@ -63,8 +63,10 @@ class HyperOptimizer:
         treeSetsSample = Sample([["P","Enough", "Samples", "Far", "Cohen", "Bins","Support", "Weight-", "Accleration+", "Mpg+", "N+"]] + self.treeSets)
         conf = Config()
         treeSetsSample.use_config(conf)
+        """
         for i in range(50):
             print(treeSetsSample.sort()[i])
+        """
         FFT(treeSetsSample, conf, branch, branches)
         # print(branches)
         b = branches[len(branches) - 1]
