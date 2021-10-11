@@ -23,7 +23,7 @@ Here are the output for HW7 </br>
 ### FFT:
 Below is the result of our hyperparameter optimization.
 ```Shell
-----------
+
 ==============================================================
 Size of data 399  rows
 0   if Bins == 0.3036885228877272 then  [2188.1, 17.0, 31.8, 114.8] (n: 75 )
