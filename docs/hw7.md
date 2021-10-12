@@ -118,7 +118,9 @@ Runtime: 2031.83 seconds
 ## What were the run times of your optimizer as you increased r?
 The run time increases near the same rate as the the r increases. When r doubles, the runtime also doubles.
 ## Does Hyperparameter optimization change a learner's behavior?
-
+The output seems change the learner's behavior since the output becomes stablelized as r increases.
+The evidence is that the learner always selects [2183.3, 23.3, 40.0, 3]
 ## Does Hyperparameter optimization improve a learner's behavior?
-
+It is hard to tell the learner's behavior is improved, all the outputs fall into the "best", and it's they looks similar.
 ## Does the Villabos hypothesis hold for car design? If not, how many random staggers do you suggest?
+
