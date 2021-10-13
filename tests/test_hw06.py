@@ -40,6 +40,7 @@ for good,bad in zip(best.x,worst.x):
        print(d)
     print()
 print("HW6*********************************************************")
+print("Hyperparameter: ", conf.getHyperparameters())
 branches = []
 branch = []
 FFT(samp, conf, branch, branches)

@@ -147,6 +147,9 @@ class Num(Col):
         #
         # find a minimum break span (.3 * expected value of standard deivation)
         n1,n2 = len(self.getAll()), len(j.getAll())
+        if n1 == 0 and n2 == 0:
+            n1=1
+            n2=2
         # print(self.getAll())
         iota = my.cohen * (self.var()*n1 + j.var()*n2) / (n1 + n2)
         #

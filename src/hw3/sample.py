@@ -228,11 +228,12 @@ class Sample:
         c = self.dist(one, two)
 
         rowPlusProjections = []
-        for row in rows:
-            a = self.dist(row, one)
-            b = self.dist(row, two)
-            projection = (a**2 + c**2 - b**2) / (2*c)
-            rowPlusProjections.append((projection, row))
+        if (c != 0):         
+            for row in rows:
+                a = self.dist(row, one)
+                b = self.dist(row, two)
+                projection = (a**2 + c**2 - b**2) / (2*c)
+                rowPlusProjections.append((projection, row))
 
         rowPlusProjections = sorted(rowPlusProjections, key=lambda proj:proj[0])
         mid = len(rows)/2
