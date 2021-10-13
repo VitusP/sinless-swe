@@ -117,7 +117,6 @@ Runtime: 2031.83 seconds
 
 ### What were the run times of your optimizer as you increased r?
 The run time increases near the same rate as the the r increases. When r doubles, the runtime also doubles.
-<<<<<<< HEAD
 ### Does Hyperparameter optimization change a learner's behavior?
 Yes, the hyper parameter optimization changes learner's behavior. It helps the learners
 to try different hyperparameters and choose a set of hyperparameters that produce the best results.
