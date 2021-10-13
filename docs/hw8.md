@@ -13,3 +13,7 @@ it could be more explainable?
   - **explain to discover**: explanations should support the extraction of novel knowledge and
     the learning of relationships and patterns
 
+## Methods
+* Compairing the bias dataset and unbias dataset, anaylsis the characteristic of these data set, finding what a raw unbias dataset should look like.
+* Create script/program to process the bias dataset, is the ouput raw dataset seems to be unbias?
+* Compare the processed dataset and the unbias dataset on their outputs that produced by a learner, are they similar?
