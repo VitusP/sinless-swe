@@ -3,7 +3,7 @@ Class to help us find the best hyperparameter for FFT trees
 """
 from src.hw6 import FFT
 from src.hw7 import Config
-from src.hw3 import Sample
+# from src.hw3 import Sample
 from copy import copy
 
 class HyperOptimizer:
@@ -76,16 +76,6 @@ class HyperOptimizer:
             else:
                 print(val['type'], ' ', val['txt'], '', val['then'], '(n:', val['n'], ')')
         return treeSetsSample.sort()[0]
-
-        # for i, b in enumerate(branches):
-        #     print("tree: ", i)
-        #     for k,val in enumerate(b):
-        #         if len(b) - 1 == k:
-        #             print(val['type'], '  else: ', val['then'], '(n:', val['n'], ')')
-        #         else:
-        #             print(val['type'], ' ', val['txt'], '', val['then'], '(n:', val['n'], ')')
-            
-        # print("Error generating FFT of Hyperparameter")
 
     def getBestHyperparameter(self):
         return self.bestHyperparameter

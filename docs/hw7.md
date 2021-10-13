@@ -1,10 +1,7 @@
 ## HW7: Hyperparameter Optimization
-**HyperOptimizer.py** </br>
-```Python
-```
 
 ### **Hyperparameter Optimization Output**
-Data used: ```auto93.csv```</br>
+Data used: ```auto93.csv```
 ```csv
 Cylinders,Displacement,Horsepower,Weight-,Acceleration+,Model,Origin,Mpg+
 8,304,193,4732,18.5,70,1,10
@@ -19,13 +16,13 @@ Cylinders,Displacement,Horsepower,Weight-,Acceleration+,Model,Origin,Mpg+
 4,91,67,1850,13.8,80,3,40
 4,86,65,2110,17.9,80,3,50
 ```
-Here are the output for HW7 </br>
+Here are the output for HW7 
 ### FFT:
 Below is the result of our hyperparameter optimization.
 ```Shell
 
 ==============================================================
-Size of data 399  rows
+r is:  30
 0   if Bins == 0.3036885228877272 then  [2188.1, 17.0, 31.8, 114.8] (n: 75 )
 1   if Support == 2 then  [2160.1, 17.5, 32.2, 57.2] (n: 1245 )
 0   if Bins == 0.4789782659135171 then  [2155.4, 16.9, 31.4, 76.7] (n: 43 )
@@ -38,8 +35,9 @@ Size of data 399  rows
 ************** r is:  30
 Best Hyperparameters:  [2, 0.4706232848599011, 64, 0.8938946646160938, 0.5982234078712435, 0.37282013290608906, 3, 2072.0, 22.0, 40.0, 5]
 Runtime: 63.13 seconds
+
 ==============================================================
-Size of data 399  rows
+r is:  60
 0   if Enough == 0.13421265760566872 then  [2158.0, 17.4, 31.7, 49.3] (n: 102 )
 0   if Enough == 0.21574356739589248 then  [2133.4, 17.3, 32.9, 42.6] (n: 183 )
 0   if Support == 3 then  [2147.4, 17.3, 31.8, 67.8] (n: 915 )
@@ -52,8 +50,9 @@ Size of data 399  rows
 ************** r is:  60
 Best Hyperparameters:  [2, 0.22585669351974974, 128, 0.8225209879204565, 0.305093878258856, 0.2159170485680586, 2, 2133.8, 22.9, 40.0, 4]
 Runtime: 99.39 seconds
+
 ==============================================================
-Size of data 399  rows
+r is:  125
 0   if Samples == 128 then  [2159.2, 17.3, 31.8, 68.1] (n: 2769 )
 0   if 0.6161697989929007 <= Enough <= 0.6385314580063823 then  [2174.2, 17.1, 31.4, 69.4] (n: 416 )
 0   if 0.6531788837269638 <= Enough <= 0.6837102525129048 then  [2150.5, 17.0, 32.0, 89.9] (n: 304 )
@@ -68,8 +67,9 @@ Size of data 399  rows
 ************** r is:  125
 Best Hyperparameters:  [2, 0.45570685035774705, 64, 0.8814627046144068, 0.10893551825019375, 0.19333752069975538, 3, 2183.3, 23.3, 40.0, 3]
 Runtime: 225.42 seconds
+
 ==============================================================
-Size of data 399  rows
+r is:  250
 0   if Far == 0.5807682337366304 then  [2151.1, 18.0, 31.0, 48.2] (n: 209 )
 0   if Bins == 0.40632720813075374 then  [2124.1, 17.7, 32.0, 42.0] (n: 162 )
 0   if Bins == 0.18431666444071274 then  [2067.9, 17.3, 32.4, 50.7] (n: 221 )
@@ -81,8 +81,9 @@ Size of data 399  rows
 ************** r is:  250
 Best Hyperparameters:  [2, 0.43637744952353474, 64, 0.5310127511595982, 0.5654640799310717, 0.10525123741426556, 3, 2130.0, 24.6, 40.0, 1]
 Runtime: 620.69 seconds
+
 ==============================================================
-Size of data 399  rows
+r is:  500
 0   if Samples == 128 then  [2158.8, 17.3, 31.8, 66.7] (n: 13068 )
 0   if Enough == 0.21701620563126778 then  [2195.9, 17.3, 32.0, 49.9] (n: 199 )
 0   if 0.29117445133634845 <= Enough <= 0.3865697202323424 then  [2143.7, 17.5, 32.2, 51.0] (n: 2153 )
@@ -95,10 +96,9 @@ Size of data 399  rows
 ************** r is:  500
 Best Hyperparameters:  [2, 0.2236342977008862, 64, 0.7156563259591495, 0.17539752625801164, 0.30159574603098377, 3, 2183.3, 23.3, 40.0, 3]
 Runtime: 1239.10 seconds
+
 ==============================================================
-Size of data 399  rows
-Error generating FFT at one point
-Error generating FFT at one point
+r is:  1000
 0   if Samples == 64 then  [2150.9, 17.3, 31.9, 63.7] (n: 25865 )
 0   if Support == 3 then  [2161.9, 17.3, 31.8, 66.6] (n: 10403 )
 0   if 0.4398516084993358 <= Enough <= 0.4972439319737486 then  [2143.0, 17.4, 31.9, 55.4] (n: 1936 )
@@ -115,10 +115,96 @@ Runtime: 2031.83 seconds
 
 ```
 
-## What were the run times of your optimizer as you increased r?
+### What were the run times of your optimizer as you increased r?
 The run time increases near the same rate as the the r increases. When r doubles, the runtime also doubles.
-## Does Hyperparameter optimization change a learner's behavior?
+### Does Hyperparameter optimization change a learner's behavior?
+Yes, the hyper parameter optimization changes learner's behavior. It helps the learners
+to try different hyperparameters and choose a set of hyperparameters that produce the best results.
+### Does Hyperparameter optimization improve a learner's behavior?
+Yes, the hyperparameter optimization does improve a learner's behavior. I think when the amount of hyperparameters are big, the optimization could help us find the right set automatically without trying it one by one which is not efficient.
+### Does the Villabos hypothesis hold for car design? If not, how many random staggers do you suggest?
+Yes, it seems that after 60 random probes, the result does not change significantly. 60 seems to be the right number to probe the hyperparameter.
+## Source Code
+```Python
+"""
+Class to help us find the best hyperparameter for FFT trees
+"""
+from src.hw6 import FFT
+from src.hw7 import Config
+from src.hw3 import Sample
+from copy import copy
 
-## Does Hyperparameter optimization improve a learner's behavior?
+class HyperOptimizer:
 
-## Does the Villabos hypothesis hold for car design? If not, how many random staggers do you suggest?
+    def __init__(self, sample, r=20) :
+        self.r = r
+        self.sample = sample
+        self.treeSets = []
+        self.samples = []
+        self.bestHyperparameter = [0]
+        # Read data and create uniqe r-size samples with unique hyperparameter
+        for index in range(r):
+            # print("Index ", index)
+            conf = Config()
+            conf.build()
+            samp = self.sample
+            samp.use_config(conf)
+            self.samples.append(samp)
+            # print("Hyper: ", conf.getHyperparameters())
+            # Generate best leaf in each iteration
+            branches = []
+            branch = []
+            self.generateBestLeafFromSample(samp, conf, branch, branches)
+        
+        # Get best hyperparameter
+        # [print(x) for x in self.treeSets]
+        self.bestHyperparameter = self.sortBestHyperparameter()
+    
+    def generateBestLeafFromSample(self, sample, conf, branch = [], branches = []):
+        try:
+            FFT(sample, conf, branch, branches)
+            for i,goal in enumerate(self.sortTrees(branches).rows):
+                xyRow = copy(conf.getHyperparameters()) + goal
+                # print("xyRow: ", xyRow)
+                self.treeSets.append(xyRow)
+        except:
+            print("Error generating FFT at one point")
+
+    def sortTrees(self, fftBranches):
+        # Input fft branches to find the best tree.
+        # Return the [-Weight, +Mpg, +Accleration, +N]
+        fftBranchSample = Sample([["Weight-", "Accleration+", "Mpg+", "N+"]])
+        for i, branch in enumerate(fftBranches):
+            branchingSample = Sample([["Weight-", "Accleration+", "Mpg+", "N+"]])
+            for k,val in enumerate(branch):
+                if val['type'] == 1:
+                    row = val['then'] + [val['n']]
+                    branchingSample.add(row)
+            fftBranchSample.add(branchingSample.sort()[0])     
+        return fftBranchSample
+                
+    def sortBestHyperparameter(self):
+        # Input treeSets to sort
+        # Return the best[p, enough, samples, far, cohen, bins, support, "Weight-", "Accleration+", "Mpg+", "N+"]
+        branches = []
+        branch = []
+        treeSetsSample = Sample([["P","Enough", "Samples", "Far", "Cohen", "Bins","Support", "Weight-", "Accleration+", "Mpg+", "N+"]] + self.treeSets)
+        conf = Config()
+        treeSetsSample.use_config(conf)
+        """
+        for i in range(50):
+            print(treeSetsSample.sort()[i])
+        """
+        FFT(treeSetsSample, conf, branch, branches)
+        # print(branches)
+        b = branches[len(branches) - 1]
+        for k,val in enumerate(b):
+            if len(b) - 1 == k:
+                print(val['type'], '  else: ', val['then'], '(n:', val['n'], ')')
+            else:
+                print(val['type'], ' ', val['txt'], '', val['then'], '(n:', val['n'], ')')
+        return treeSetsSample.sort()[0]
+
+    def getBestHyperparameter(self):
+        return self.bestHyperparameter
+```
