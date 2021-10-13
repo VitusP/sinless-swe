@@ -2,6 +2,8 @@
 
 ### How do we spot bias in data?
 If we can remove bias in data, will it help learners to be more unbiased?
+* Pre-process the data by removing biased sensitive features
+* minimize the weight of these biased features
 
 ### How do we improve learners explanability?
 * Given that there are lots of learners out there, how could we improve the learners so 
